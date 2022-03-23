@@ -20,7 +20,6 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uploadFoder = request.getServletContext().getRealPath("/uploads");
         Path uploadPath = Paths.get(uploadFoder);
-        System.out.println(uploadFoder);
 
         if(!Files.exists(uploadPath)) {
             Files.createDirectory(uploadPath);

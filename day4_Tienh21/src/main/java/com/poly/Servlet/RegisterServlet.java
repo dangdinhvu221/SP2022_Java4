@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.util.Date;
 
 @MultipartConfig
-@WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("view/register.jsp").forward(request, response);
+        request.getRequestDispatcher("views/register.jsp").forward(request, response);
     }
 
     @Override
@@ -43,30 +43,11 @@ public class RegisterServlet extends HttpServlet {
             photo.write(photoFile.getAbsolutePath());
             staff.setImageName(photoFile.getName());
             request.setAttribute("bean", staff);
-            request.getRequestDispatcher("view/register.jsp").forward(request, response);
+            request.getRequestDispatcher("views/register.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-//        String fullname = request.getParameter("fullname");
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-//        String gender = request.getParameter("gender");
-//        String address  = request.getParameter("address");
-//        String email = request.getParameter("email");
-//
-//
-//        request.setAttribute("fullname", fullname);
-//        request.setAttribute("username", username);
-//        request.setAttribute("password", password);
-//        request.setAttribute("gender", gender);
-//        request.setAttribute("address", address);
-//        request.setAttribute("email",email);
-//        request.setAttribute("phone", request.getParameter("phone"));
-//        request.setAttribute("account", request.getParameter("account"));
-//
         request.getRequestDispatcher("/views/register.jsp").forward(request, response);
     }
 }
