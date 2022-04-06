@@ -18,6 +18,8 @@
     <!-- Bootstrap CSS v5.0.2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/sorttable.js"></script>
+
     <base href="/lab5_v2_war_exploded/">
 </head>
 
@@ -109,10 +111,11 @@
                         <button formaction="UsersServlet/delete?id=${user.id}" class="btn btn-outline-danger col-2">Delete</button>
                         <button formaction="UsersServlet/update?id=${user.id}" class="btn btn-outline-info col-2">Update</button>
                         <button formaction="UsersServlet/reset" class="btn btn-outline-warning col-2">Reset</button>
+                        <button formaction="UsersServlet/search" class="btn btn-outline-secondary col-2">Search</button>
                     </div>
                 </form>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover table-info text-center">
+                    <table class="table table-striped table-bordered table-hover table-info text-center sortable">
                         <thead>
                         <tr>
                             <th scope="col">Fullname</th>

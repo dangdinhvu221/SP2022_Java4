@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="vudd_ph14036_assm:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>vudd_ph14036_assm</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="vudd_ph14036_assm-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="vudd_ph14036_assm:war exploded" />
+    </root>
+  </artifact>
+</component>

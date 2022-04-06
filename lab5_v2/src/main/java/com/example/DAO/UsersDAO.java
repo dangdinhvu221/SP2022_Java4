@@ -9,21 +9,35 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class UsersDAO {
-    EntityManager entityManager = jpaUtils.getEntityManager();
-    EntityTransaction entityTransaction = entityManager.getTransaction();
-
+   private EntityManager entityManager;
+   private EntityTransaction entityTransaction;
 
     public List<Users> findAll() {
-        String sql = "select u from Users u";
+        entityManager = jpaUtils.getEntityManager();
+        entityTransaction = entityManager.getTransaction();
+        String sql = "select u from Users u order by u.id desc";
         TypedQuery<Users> query = entityManager.createQuery(sql, Users.class);
         return query.getResultList();
     }
 
+    public List<Users> findKeyword(String key) {
+        entityManager = jpaUtils.getEntityManager();
+        entityTransaction = entityManager.getTransaction();
+        String sql = "select u from Users u where u.fullname like:key";
+        TypedQuery<Users> query = entityManager.createQuery(sql, Users.class);
+        query.setParameter("key", "%" + key + "%");
+        return query.getResultList();
+    }
+
     public Users findByID(int id){
+        entityManager = jpaUtils.getEntityManager();
+        entityTransaction = entityManager.getTransaction();
         return entityManager.find(Users.class, id);
     }
 
     public void insert(Users user) {
+        entityManager = jpaUtils.getEntityManager();
+        entityTransaction = entityManager.getTransaction();
         try {
             entityTransaction.begin();
             entityManager.persist(user);
@@ -38,6 +52,8 @@ public class UsersDAO {
     }
 
     public void update(Users user) {
+        entityManager = jpaUtils.getEntityManager();
+        entityTransaction = entityManager.getTransaction();
         try {
             entityTransaction.begin();
             entityManager.merge(user);
@@ -52,6 +68,8 @@ public class UsersDAO {
     }
 
     public void delete(int id) throws Exception {
+        entityManager = jpaUtils.getEntityManager();
+        entityTransaction = entityManager.getTransaction();
         Users user = entityManager.find(Users.class, id);
         try {
             entityTransaction.begin();

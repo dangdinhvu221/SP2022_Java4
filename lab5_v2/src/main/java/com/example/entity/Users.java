@@ -25,7 +25,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "fullname", nullable = true, length = 255)
+    @Column(name = "fullname", nullable = false, length = 225)
     public String getFullname() {
         return fullname;
     }
@@ -35,7 +35,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "address", nullable = true, length = 255)
+    @Column(name = "address", nullable = false, length = 225)
     public String getAddress() {
         return address;
     }
@@ -45,7 +45,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "email", nullable = true, length = 255)
+    @Column(name = "email", nullable = false, length = 225)
     public String getEmail() {
         return email;
     }
@@ -55,7 +55,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "password", nullable = true, length = 255)
+    @Column(name = "password", nullable = false, length = 225)
     public String getPassword() {
         return password;
     }
@@ -65,7 +65,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "phone", nullable = true, length = 11)
+    @Column(name = "phone", nullable = false, length = 11)
     public String getPhone() {
         return phone;
     }
@@ -75,7 +75,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "avatar", nullable = true, length = 255)
+    @Column(name = "avatar", nullable = true, length = 225)
     public String getAvatar() {
         return avatar;
     }
