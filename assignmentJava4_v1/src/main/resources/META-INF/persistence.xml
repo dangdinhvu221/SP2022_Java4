@@ -8,12 +8,12 @@
         <class>poly.Entity.Users</class>
         <class>poly.Entity.Category</class>
         <class>poly.Entity.Favorite</class>
-        <class>poly.Entity.OrderStates</class>
-        <class>poly.Entity.Orderdetails</class>
-        <class>poly.Entity.Orders</class>
         <class>poly.Entity.Products</class>
         <class>poly.Entity.Share</class>
         <class>poly.Entity.Supplier</class>
+        <class>poly.Entity.Order</class>
+        <class>poly.Entity.Orders</class>
+        <class>poly.Entity.OrderStates</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost;database=AssignmentJava4"/>
             <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>

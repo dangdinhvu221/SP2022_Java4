@@ -134,7 +134,7 @@ public class UsersDAO implements shopDao<Users, Integer> {
             entityTransaction = entityManager.getTransaction();
             String jpql = "select u from Users u where u.username like:key";
             TypedQuery<Users> query = entityManager.createQuery(jpql, Users.class);
-            query.setParameter("key", "%" + key + "%");
+            query.setParameter("key", key);
             return query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();

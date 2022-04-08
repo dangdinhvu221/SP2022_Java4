@@ -43,7 +43,6 @@ public class UsersServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         request.setAttribute("views", "/views/admin/Component/contentV2.jsp");
-
         String uri = request.getRequestURI();
         if (uri.contains("index")) {
             request.setAttribute("views", "/views/admin/Component/contentV2.jsp");
@@ -71,7 +70,6 @@ public class UsersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-
         String uri = request.getRequestURI();
         if (uri.contains("createUser")) {
             this.doInsertUser(request, response);
@@ -85,7 +83,9 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void doUpdateUser(HttpServletRequest request, HttpServletResponse response) {
+        validateForm(request, response);
         String method = request.getMethod();
+        int id = Integer.parseInt(request.getParameter("id"));
         if (method.equalsIgnoreCase("POST")) {
             try {
                 File dir = new File(request.getServletContext().getRealPath("/uploads"));
@@ -95,13 +95,15 @@ public class UsersServlet extends HttpServlet {
                 Part photo = request.getPart("avatar");
                 File photoFile = new File(dir, photo.getSubmittedFileName());
                 photo.write(photoFile.getAbsolutePath());
+                Users userPassOld = dao.findByID(id);
                 Users user = new Users();
+                BeanUtils.populate(user, request.getParameterMap());
                 user.setAvatar(photoFile.getName());
                 user.setStatus(true);
                 Date date = new Date();
                 Timestamp ts = new Timestamp(date.getTime());
                 user.setCreated(ts);
-                BeanUtils.populate(user, request.getParameterMap());
+                user.setPassword(userPassOld.getPassword());
                 dao.update(user);
                 request.setAttribute("message", "User update successfully!");
             } catch (Exception e) {
@@ -126,6 +128,7 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void doInsertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        validateForm(request, response);
         String method = request.getMethod();
         if (method.equalsIgnoreCase("POST")) {
             try {
@@ -150,7 +153,7 @@ public class UsersServlet extends HttpServlet {
                 request.setAttribute("message", "User inserted successfully!");
             } catch (Exception e) {
                 e.printStackTrace();
-                request.setAttribute("error", "ERROR: " + e.getMessage());
+//                request.setAttribute("error", "ERROR: " + e.getMessage());
             }
             this.adminUsers(request, response);
         }
@@ -183,5 +186,22 @@ public class UsersServlet extends HttpServlet {
         request.setAttribute("tableUsers", "/views/admin/ManagerUser/tableUser.jsp");
         request.setAttribute("views", "/views/admin/ManagerUser/formUsers.jsp");
         this.findAll(request, response);
+    }
+
+    private void validateForm(HttpServletRequest request, HttpServletResponse response){
+        String username = request.getParameter("username");
+        String fullName = request.getParameter("fullName");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String password = request.getParameter("password");
+        String rePassword = request.getParameter("rePassword");
+        String avatar = request.getParameter("avatar");
+
+        if(username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
+                phone.length() == 0 || password.length() == 0 || rePassword.length() == 0 || avatar.length() == 0){
+            request.setAttribute("error", "Can not be empty!!!");
+        }
+
     }
 }

@@ -21,7 +21,7 @@ public class OrderStates {
     }
 
     @Basic
-    @Column(name = "nameStates", nullable = true, length = 255)
+    @Column(name = "nameStates", nullable = true, length = 50)
     public String getNameStates() {
         return nameStates;
     }

@@ -6,12 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <nav class="colorlib-nav" role="navigation">
     <div class="top-menu">
         <div class="container">
             <div class="row">
                 <div class="col-sm-7 col-md-9">
-                    <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
+                    <div id="colorlib-logo"><a href="HomePagesServlet">FPT-Polytechnic</a></div>
                 </div>
                 <div class="col-sm-5 col-md-3">
                     <form action="#" class="search-wrap">
@@ -26,21 +28,51 @@
             <div class="row">
                 <div class="col-sm-12 text-left menu-1">
                     <ul>
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><a href="HomePagesServlet">Home</a></li>
                         <li class="has-dropdown">
-                            <a href="men.html">Men</a>
+                            <a href="HomePagesServlet">Men</a>
                             <ul class="dropdown">
-                                <li><a href="product-detail.html">Product Detail</a></li>
-                                <li><a href="cart.html">Shopping Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="order-complete.html">Order Complete</a></li>
-                                <li><a href="add-to-wishlist.html">Wishlist</a></li>
+                                <li><a href="CartServlet">Shopping Cart</a></li>
+                                <li><a href="CheckoutProductServlet">Checkout</a></li>
+                                <li><a href="HomePagesServlet">Order Complete</a></li>
+                                <li><a href="HomePagesServlet">Wishlist</a></li>
                             </ul>
                         </li>
-                        <li><a href="women.html">Women</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="HomePagesServlet/contact">Contact</a></li>
+
+                        <li class="dropdown-toggle cart" data-toggle="dropdown">
+                            <a href="#"><i class="icon-user"></i><span>
+                                <c:choose>
+                                    <c:when test="${users.fullName == null}"></c:when>
+                                    <c:otherwise>${users.fullName}</c:otherwise>
+                                </c:choose>
+                            </span></a>
+                        </li>
+                        <div class="dropdown-menu">
+                            <c:choose>
+                                <c:when test="${users.role == true}">
+                                    <a class="dropdown-item" href="AdminServlet">Dashboard</a>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${users.username != null}">
+                                    <a class="dropdown-item"
+                                       href="${pageContext.request.contextPath}/views/user/profile/profileUser.jsp"
+                                       id="profile">My Profile</a>
+                                    <hr>
+                                    <a class="dropdown-item" href="HomePagesServlet/help">Help</a>
+                                    <a class="dropdown-item" href="HomePagesServlet/logout"><span>Log Out</span> <i
+                                            class="fa fa-sign-out"></i></a>
+                                </c:when>
+                                <c:when test="${users.username == null}">
+                                    <a class="dropdown-item" href="HomePagesServlet/login">Login</a>
+                                    <a class="dropdown-item" href="HomePagesServlet/register">Register</a>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                        <li class="cart"><a href="CartServlet"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
                     </ul>
                 </div>
             </div>

@@ -32,15 +32,15 @@
                         <div class="col-lg-12">
                             <div class="full dis_flex center_text">
                                 <div class="profile_img"><img width="180px" height="180px" class="rounded-circle"
-                                                              src="${pageContext.request.contextPath}/uploads/${profile_list.avatar}"
+                                                              src="${pageContext.request.contextPath}/uploads/${users.avatar}"
                                                               alt="#"/></div>
                                 <div class="profile_contant">
                                     <div class="contact_inner">
-                                        <h3>${profile_list.fullName}</h3>
-                                        <p><strong>About: </strong>${profile_list.address}</p>
+                                        <h3>${users.fullName}</h3>
+                                        <p><strong>About: </strong>${users.address}</p>
                                         <ul class="list-unstyled">
-                                            <li><i class="fa fa-envelope-o"></i> : ${profile_list.email}</li>
-                                            <li><i class="fa fa-phone"></i> : ${profile_list.phone}</li>
+                                            <li><i class="fa fa-envelope-o"></i> : ${users.email}</li>
+                                            <li><i class="fa fa-phone"></i> : ${users.phone}</li>
                                         </ul>
                                     </div>
                                     <div class="user_progress_bar">
@@ -150,7 +150,7 @@
                                             <div class="tab-pane fade" id="profile_section"
                                                  role="tabpanel" aria-labelledby="nav-contact-tab">
                                                 <form action="ChangePasswordServlet" method="post">
-                                                    <input type="hidden" name="idUser" value="${profile_list.id}" readonly>
+                                                    <input type="hidden" name="idUser" value="${users.id}" readonly>
                                                     <div class="row">
                                                         <div class="col">
                                                             <c:if test="${not empty message}">
@@ -181,7 +181,7 @@
                                                         <div class="form-group col-lg-12">
                                                             <label  for="password">Password Old</label>
                                                             <input readonly type="password" name="password" id="password" class="form-control"
-                                                                   placeholder="" aria-describedby="helpId1" value="${profile_list.password}">
+                                                                   placeholder="" aria-describedby="helpId1" value="${users.password}">
                                                             <small id="helpId1" class="text-muted"></small>
                                                         </div>
                                                         <div class="form-group col-lg-12">
@@ -197,7 +197,7 @@
                                                             <small id="helpId3" class="text-muted"></small>
                                                         </div>
                                                     </div>
-                                                    <button formaction="ChangePasswordServlet/changePassword?id=${profile_list.id}" class="btn btn-outline-success btn-block" onsubmit=" notload();">Change Password</button>
+                                                    <button formaction="ChangePasswordServlet/changePassword?id=${users.id}" class="btn btn-outline-success btn-block" onsubmit=" notload();">Change Password</button>
                                                     <button type="reset" class="btn btn-outline-info btn-block">Reset</button>
                                                 </form>
                                             </div>

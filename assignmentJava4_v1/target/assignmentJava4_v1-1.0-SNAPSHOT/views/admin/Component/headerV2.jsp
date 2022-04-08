@@ -29,42 +29,42 @@
                         <li>
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                 <c:choose>
-                                    <c:when test="${profile_list.avatar == null}">
+                                    <c:when test="${users.avatar == null}">
                                         <img class="img-responsive"
                                              src="${pageContext.request.contextPath}/uploads/user_img.jpg" alt="#"/>
                                     </c:when>
                                     <c:otherwise>
                                         <img class="img-responsive"
-                                             src="${pageContext.request.contextPath}/uploads/${profile_list.avatar}"
+                                             src="${pageContext.request.contextPath}/uploads/${users.avatar}"
                                              alt="#"/>
                                     </c:otherwise>
                                 </c:choose>
                                 <span class="name_user">
                                 <c:choose>
-                                    <c:when test="${profile_list.fullName == null}">Username</c:when>
-                                    <c:otherwise>${profile_list.fullName}</c:otherwise>
+                                    <c:when test="${users.fullName == null}">Username</c:when>
+                                    <c:otherwise>${users.fullName}</c:otherwise>
                                 </c:choose>
                                 </span>
                                 <span class="font-weight-lighter">
                                     <c:choose>
-                                        <c:when test="${profile_list.role == true}">Admin</c:when>
-                                        <c:when test="${profile_list.role == false}">User</c:when>
+                                        <c:when test="${users.role == true}">Admin</c:when>
+                                        <c:when test="${users.role == false}">User</c:when>
                                     </c:choose>
                                 </span>
                             </a>
                             <div class="dropdown-menu">
                                 <c:choose>
-                                    <c:when test="${profile_list.username != null}">
+                                    <c:when test="${users.username != null}">
                                         <a class="dropdown-item" href="AdminServlet/profile" id="profile">My Profile</a>
                                         <hr>
                                         <a class="dropdown-item" href="">Settings</a>
                                         <a class="dropdown-item" href="">Help</a>
                                         <a class="dropdown-item" href="AdminServlet/logout"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                                     </c:when>
-                                    <c:when test="${profile_list.username == null}">
+                                    <c:when test="${users.username == null}">
                                         <a class="dropdown-item" href="LoginControlServlet">Login</a>
                                         <hr>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#elegantModalForm2">Register</a>
+                                        <a class="dropdown-item" href="HomePagesServlet/register">Register</a>
                                     </c:when>
                                 </c:choose>
 

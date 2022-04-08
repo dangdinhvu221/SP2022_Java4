@@ -45,30 +45,30 @@
     </div>--%>
     <div class="colorlib-product">
         <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-                        <h2>Product</h2>
-                    </div>
+            <div class="row">
+                <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+                    <h2>Product</h2>
                 </div>
-            <c:forEach var="item" items="${products}">
+            </div>
             <div class="row row-pb-md">
+                <c:forEach var="item" items="${list_products}">
                     <div class="col-lg-3 mb-4 text-center">
                         <div class="product-entry border">
-                            <a href="#" class="prod-img">
+                            <a href="DetailsProductServlet?id=${item.id}" class="prod-img">
                                 <img src="uploads/${item.imageProduct}" class="img-fluid"
                                      alt="Free html5 bootstrap 4 template">
                             </a>
                             <div class="desc">
-                                <h2><a href="#">${item.nameProduct}</a></h2>
+                                <h2><a href="ShowCartServlet?id=${item.id}">${item.nameProduct}</a></h2>
                                 <h5 class="text-secondary text-muted font-italic"></h5>
                                 <span class="price"><fmt:formatNumber type="number" maxFractionDigits="3"
                                                                       value="${item.price}"/>$</span>
                             </div>
                         </div>
                     </div>
-                        <%--                    <div class="w-100"></div>--%>
-                </div>
-            </c:forEach>
+<%--                    <div class="w-100"></div>--%>
+                </c:forEach>
+            </div>
             <div class="row">
                 <div class="col-md-12 text-center mt-2 mb-2">
                     <div class="block-27">
@@ -87,37 +87,6 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <p><a href="#" class="btn btn-primary btn-lg">Shop All Products</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="colorlib-partner">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
-                    <h2>Trusted Partners</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col partner-col text-center">
-                    <img src="${pageContext.servletContext.contextPath}/views/user/images/brand-1.jpg" class="img-fluid"
-                         alt="Free html4 bootstrap 4 template">
-                </div>
-                <div class="col partner-col text-center">
-                    <img src="${pageContext.servletContext.contextPath}/views/user/images/brand-2.jpg" class="img-fluid"
-                         alt="Free html4 bootstrap 4 template">
-                </div>
-                <div class="col partner-col text-center">
-                    <img src="${pageContext.servletContext.contextPath}/views/user/images/brand-3.jpg" class="img-fluid"
-                         alt="Free html4 bootstrap 4 template">
-                </div>
-                <div class="col partner-col text-center">
-                    <img src="${pageContext.servletContext.contextPath}/views/user/images/brand-4.jpg" class="img-fluid"
-                         alt="Free html4 bootstrap 4 template">
-                </div>
-                <div class="col partner-col text-center">
-                    <img src="${pageContext.servletContext.contextPath}/views/user/images/brand-5.jpg" class="img-fluid"
-                         alt="Free html4 bootstrap 4 template">
                 </div>
             </div>
         </div>

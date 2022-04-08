@@ -2,11 +2,8 @@ package poly.Entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM Users u")
 public class Users {
     private int id;
     private String username;
@@ -20,19 +17,6 @@ public class Users {
     private Timestamp created;
     private Boolean role;
     private Boolean status;
-    private Timestamp birth;
-
-//    @Access(AccessType.PROPERTY)
-//    @OneToMany(targetEntity=Category.class, mappedBy = "userID", fetch=FetchType.EAGER)
-//    private List<Category> categories;
-//
-//    public List<Category> getCategories() {
-//        return categories;
-//    }
-//
-//    public void setCategories(List<Category> categories) {
-//        this.categories = categories;
-//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -155,16 +139,6 @@ public class Users {
         this.status = status;
     }
 
-    @Basic
-    @Column(name = "birth", nullable = true)
-    public Timestamp getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Timestamp birth) {
-        this.birth = birth;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -184,7 +158,6 @@ public class Users {
         if (created != null ? !created.equals(users.created) : users.created != null) return false;
         if (role != null ? !role.equals(users.role) : users.role != null) return false;
         if (status != null ? !status.equals(users.status) : users.status != null) return false;
-        if (birth != null ? !birth.equals(users.birth) : users.birth != null) return false;
 
         return true;
     }
@@ -203,7 +176,6 @@ public class Users {
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (birth != null ? birth.hashCode() : 0);
         return result;
     }
 }

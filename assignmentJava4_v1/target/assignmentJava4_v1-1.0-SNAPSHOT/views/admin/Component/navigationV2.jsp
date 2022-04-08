@@ -23,12 +23,12 @@
             <div class="user_profle_side">
                 <div class="user_img">
                     <c:choose>
-                        <c:when test="${profile_list.avatar == null}">
+                        <c:when test="${users.avatar == null}">
                             <img class="img-responsive" src="${pageContext.request.contextPath}/uploads/user_img.jpg"
                                  alt="#"/>
                         </c:when>
                         <c:otherwise>
-                            <img class="img-responsive" src="${pageContext.request.contextPath}/uploads/${profile_list.avatar}"
+                            <img class="img-responsive" src="${pageContext.request.contextPath}/uploads/${users.avatar}"
                                  alt="#"/>
                         </c:otherwise>
                     </c:choose>
@@ -37,13 +37,13 @@
                 <div class="user_info">
                     <h6>
                         <c:choose>
-                            <c:when test="${profile_list.fullName == null}">Username</c:when>
-                            <c:otherwise>${profile_list.fullName}</c:otherwise>
+                            <c:when test="${users.fullName == null}">Username</c:when>
+                            <c:otherwise>${users.fullName}</c:otherwise>
                         </c:choose>
                     </h6>
                     <p>
                         <c:choose>
-                            <c:when test="${profile_list.status == null}">
+                            <c:when test="${users.status == null}">
                                 <span class="text-secondary">Offline</span>
                             </c:when>
                             <c:otherwise>

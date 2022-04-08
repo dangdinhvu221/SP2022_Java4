@@ -17,7 +17,7 @@
                    placeholder="Search this blog">
         </label>
         <div class="input-group-append">
-            <button type="button"  class="btn btn-secondary">
+            <button type="button" class="btn btn-secondary">
                 <i class="fa fa-search"></i>
             </button>
         </div>
@@ -78,15 +78,16 @@
                        class="btn btn-outline-secondary fw-bold">Edit</a>
                 </td>
                 <td>
-                    <button type="button"
-                            class="btn btn-outline-danger fw-bold " id="deleteUser" onclick="alertWarningDelete()">
+                    <button type="button" formaction="AdminServlet/deleteUser?id=${user.id}"
+                            class="btn btn-outline-danger fw-bold " id="deleteUser"
+                            onclick="alertWarningDelete(${user.id})">
                         Delete
                     </button>
                 </td>
             </tr>
             <script>
                 var alertWarningDelete = document.querySelector("#deleteUser");
-                alertWarningDelete = function () {
+                alertWarningDelete = function (id) {
                     Swal.fire({
                         title: 'Warning?',
                         text: "Do you want to delete this user?!",
@@ -94,7 +95,7 @@
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#dd3333',
-                        confirmButtonText: '<a href="AdminServlet/deleteUser?id=${user.id}" class = "text-light">Yes, Delete it!</a>'
+                        confirmButtonText: '<a href="AdminServlet/deleteUser?id='+id+'" class = "text-light">Yes, Delete it!</a>'
                     })
                 }
             </script>

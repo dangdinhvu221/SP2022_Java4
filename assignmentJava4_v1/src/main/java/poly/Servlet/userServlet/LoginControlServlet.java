@@ -46,9 +46,7 @@ public class LoginControlServlet extends HttpServlet {
         }
         request.setAttribute("views", "/views/admin/Login/loginForm.jsp");
     }
-
-    private void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+    private void doLoginHomePage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -56,7 +54,34 @@ public class LoginControlServlet extends HttpServlet {
             HttpSession session = request.getSession();
             if (username.length() == 0 || password.length() == 0) {
                 session.setAttribute("error", "Username or password cannot be empty!!!");
-                response.sendRedirect("/assignmentJava4_v1_war_exploded/LoginControlServlet");
+                response.sendRedirect(request.getContextPath() +"/assignmentJava4_v1_war_exploded/HomePagesServlet/HomePagesServlet/login");
+            }
+//            Users users = usersDAO.findKeywordUser(username.trim());
+//            boolean checkPass = EncryptUtils.check(password, users.getPassword());
+//            if (checkPass == true) {
+//                session.setAttribute("users", users);
+//                session.setAttribute("message", "Login successfully !");
+//                response.sendRedirect(request.getContextPath() +"/assignmentJava4_v1_war_exploded/HomePagesServlet");
+//            } else {
+//                session.setAttribute("error", "Wrong user or password");
+//                response.sendRedirect(request.getContextPath() +"/assignmentJava4_v1_war_exploded/HomePagesServlet/HomePagesServlet/login");
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        request.getRequestDispatcher("/views/user/loginFormHomePage/loginHomePage.jsp").forward(request, response);
+    }
+
+    private void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //        session
+        HttpSession session = request.getSession();
+        try {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            if (username.length() == 0 || password.length() == 0) {
+                session.setAttribute("error", "Username or password cannot be empty!!!");
+//                response.sendRedirect("/assignmentJava4_v1_war_exploded/LoginControlServlet");
             }
             Users users = dao.findKeywordUser(username.trim());
             boolean checkPass = EncryptUtils.check(password, users.getPassword());
@@ -69,6 +94,8 @@ public class LoginControlServlet extends HttpServlet {
                 response.sendRedirect("/assignmentJava4_v1_war_exploded/LoginControlServlet");
             }
         } catch (Exception e) {
+            session.setAttribute("error", "Wrong user or password");
+            response.sendRedirect("/assignmentJava4_v1_war_exploded/LoginControlServlet");
             e.printStackTrace();
         }
     }

@@ -3,6 +3,7 @@ package poly.Servlet.userServlet;
 import org.apache.commons.beanutils.BeanUtils;
 import poly.DAO.UsersDAO;
 import poly.Entity.Users;
+import poly.Utils.EncryptUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -42,7 +43,8 @@ public class ChangePasswordServlet extends HttpServlet {
                     int id = Integer.parseInt(request.getParameter("idUser"));
                     Users users = usersDAO.findByID(id);
                     BeanUtils.populate(users, request.getParameterMap());
-                    users.setPassword(passwordNew);
+                    String encryptedPass  = EncryptUtils.encrypt(passwordNew);
+                    users.setPassword(encryptedPass);
                     usersDAO.update(users);
                     System.out.println(id);
                     request.setAttribute("message", "Change Passwords successfully!");

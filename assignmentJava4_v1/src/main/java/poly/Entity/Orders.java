@@ -1,23 +1,18 @@
 package poly.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.sql.Timestamp;
+import javax.persistence.*;
 
 @Entity
 public class Orders {
     private int id;
-    private Double amount;
-    private String customerName;
-    private String shipAddress;
-    private String phone;
-    private Timestamp created;
-    private Timestamp updated;
-    private Timestamp fixer;
+    private Integer oderQuantity;
+    private String date;
+    private Users usersByUserId;
+    private Products productsByProductId;
+    private OrderStates ordersByOrderId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -28,73 +23,53 @@ public class Orders {
     }
 
     @Basic
-    @Column(name = "amount", nullable = true, precision = 0)
-    public Double getAmount() {
-        return amount;
+    @Column(name = "oder_quantity", nullable = true)
+    public Integer getOderQuantity() {
+        return oderQuantity;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    @Basic
-    @Column(name = "customerName", nullable = true, length = 255)
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setOderQuantity(Integer oderQuantity) {
+        this.oderQuantity = oderQuantity;
     }
 
     @Basic
-    @Column(name = "ship_address", nullable = true, length = 2147483647)
-    public String getShipAddress() {
-        return shipAddress;
+    @Column(name = "date", nullable = true, length = 50)
+    public String getDate() {
+        return date;
     }
 
-    public void setShipAddress(String shipAddress) {
-        this.shipAddress = shipAddress;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    @Basic
-    @Column(name = "phone", nullable = true, length = 20)
-    public String getPhone() {
-        return phone;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public Users getUsersByUserId() {
+        return usersByUserId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUsersByUserId(Users usersByUserId) {
+        this.usersByUserId = usersByUserId;
     }
 
-    @Basic
-    @Column(name = "created", nullable = true)
-    public Timestamp getCreated() {
-        return created;
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    public Products getProductsByProductId() {
+        return productsByProductId;
     }
 
-    public void setCreated(Timestamp created) {
-        this.created = created;
+    public void setProductsByProductId(Products productsByProductId) {
+        this.productsByProductId = productsByProductId;
     }
 
-    @Basic
-    @Column(name = "updated", nullable = true)
-    public Timestamp getUpdated() {
-        return updated;
+    @ManyToOne
+    @JoinColumn(name = "statusState", referencedColumnName = "id")
+    public OrderStates getOrdersByOrderId() {
+        return ordersByOrderId;
     }
 
-    public void setUpdated(Timestamp updated) {
-        this.updated = updated;
-    }
-
-    @Basic
-    @Column(name = "fixer", nullable = true)
-    public Timestamp getFixer() {
-        return fixer;
-    }
-
-    public void setFixer(Timestamp fixer) {
-        this.fixer = fixer;
+    public void setOrdersByOrderId(OrderStates ordersByOrderId) {
+        this.ordersByOrderId = ordersByOrderId;
     }
 
     @Override
@@ -105,14 +80,9 @@ public class Orders {
         Orders orders = (Orders) o;
 
         if (id != orders.id) return false;
-        if (amount != null ? !amount.equals(orders.amount) : orders.amount != null) return false;
-        if (customerName != null ? !customerName.equals(orders.customerName) : orders.customerName != null)
+        if (oderQuantity != null ? !oderQuantity.equals(orders.oderQuantity) : orders.oderQuantity != null)
             return false;
-        if (shipAddress != null ? !shipAddress.equals(orders.shipAddress) : orders.shipAddress != null) return false;
-        if (phone != null ? !phone.equals(orders.phone) : orders.phone != null) return false;
-        if (created != null ? !created.equals(orders.created) : orders.created != null) return false;
-        if (updated != null ? !updated.equals(orders.updated) : orders.updated != null) return false;
-        if (fixer != null ? !fixer.equals(orders.fixer) : orders.fixer != null) return false;
+        if (date != null ? !date.equals(orders.date) : orders.date != null) return false;
 
         return true;
     }
@@ -120,13 +90,8 @@ public class Orders {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        result = 31 * result + (customerName != null ? customerName.hashCode() : 0);
-        result = 31 * result + (shipAddress != null ? shipAddress.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (updated != null ? updated.hashCode() : 0);
-        result = 31 * result + (fixer != null ? fixer.hashCode() : 0);
+        result = 31 * result + (oderQuantity != null ? oderQuantity.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
 }

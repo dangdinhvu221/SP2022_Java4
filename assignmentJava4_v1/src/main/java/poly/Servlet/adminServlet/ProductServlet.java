@@ -44,7 +44,6 @@ public class ProductServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
-//        request.setAttribute("views", "/views/admin/ManagerProduct/formProduct.jsp");
         String uri = request.getRequestURI();
         if (uri.contains("deleteProduct")) {
             this.doDeleteProduct(request, response);
@@ -99,6 +98,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void doUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        validateForm(request, response);
         String method = request.getMethod();
         if (method.equalsIgnoreCase("POST")) {
             try {
@@ -130,7 +130,7 @@ public class ProductServlet extends HttpServlet {
 
                 request.setAttribute("message", "Product update successfully !");
             } catch (Exception e) {
-                request.setAttribute("error", "ERROR: " + e.getMessage());
+//                request.setAttribute("error", "ERROR: " + e.getMessage());
                 e.printStackTrace();
             }
             this.ProductFillAll(request, response);
@@ -138,6 +138,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void doCreateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        validateForm(request, response);
         try {
             File dir = new File(request.getServletContext().getRealPath("/uploads"));
             if (!dir.exists()) {
@@ -167,7 +168,7 @@ public class ProductServlet extends HttpServlet {
 
             request.setAttribute("message", "Product inserted successfully !");
         } catch (Exception e) {
-            request.setAttribute("error", "ERROR: " + e.getMessage());
+//            request.setAttribute("error", "ERROR: " + e.getMessage());
             e.printStackTrace();
         }
         this.ProductFillAll(request, response);
@@ -193,5 +194,20 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("error", "Error: " + e.getMessage());
         }
+    }
+
+    private void validateForm(HttpServletRequest request, HttpServletResponse response){
+        String name = request.getParameter("nameProduct");
+        String quantity = request.getParameter("quantity");
+        String price = request.getParameter("price");
+        String color = request.getParameter("color");
+        String size = request.getParameter("size");
+        String image = request.getParameter("imageProduct");
+
+        if(name.length() == 0 || quantity.length() == 0 || price.length() == 0 || color.length() == 0 ||
+                size.length() == 0 || image.length() == 0){
+            request.setAttribute("error", "Can not be empty!!!");
+        }
+
     }
 }

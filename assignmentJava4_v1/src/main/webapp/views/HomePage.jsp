@@ -6,10 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
+    <title>FPT-Polytechnic</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -39,14 +41,43 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/css/bootstrap-datepicker.css">
     <!-- Flaticons  -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/fonts/flaticon/font/flaticon.css">
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Theme style  -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/css/style.css">
 <%--    <base href="/assignmentJava4_v1_war_exploded/">--%>
+
 </head>
 <body>
 
 <div class="colorlib-loader"></div>
+<div class="row">
+    <div class="col">
+        <c:if test="${not empty sessionScope.message}">
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "SuccessFully!",
+                    text: "${sessionScope.message}",
+                    showConfirmButton: false,
+                    closeOnClickOutside: false,
+                    allowOutsideClick: false,
+                    timer: 1600,
+                });
+            </script>
+            <c:remove var="message" scope="session"/>
+        </c:if>
+        <c:if test="${not empty sessionScope.error}">
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR!',
+                    text: '${sessionScope.error}',
+                })
+            </script>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+    </div>
+</div>
 
 <div id="page">
     <%--    navigation--%>
@@ -86,6 +117,7 @@
 <script src="${pageContext.request.contextPath}/views/user/js/jquery.stellar.min.js"></script>
 <!-- Main -->
 <script src="${pageContext.request.contextPath}/views/user/js/main.js"></script>
+
 </body>
 </html>
 

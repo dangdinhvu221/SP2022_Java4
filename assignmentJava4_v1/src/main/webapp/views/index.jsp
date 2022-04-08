@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Pluto - Responsive Bootstrap Admin Panel Templates</title>
+    <title>FPT_Polytechnic</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -43,12 +43,12 @@
 <div class="full_container">
     <div class="row">
         <div class="col">
-            <c:if test="${not empty message}">
+            <c:if test="${not empty sessionScope.message}">
                 <script>
                     Swal.fire({
                         icon: "success",
                         title: "SuccessFully!",
-                        text: "${message}",
+                        text: "${sessionScope.message}",
                         showConfirmButton: false,
                         closeOnClickOutside: false,
                         allowOutsideClick: false,
@@ -57,18 +57,19 @@
                 </script>
                 <c:remove var="message" scope="session"/>
             </c:if>
-            <c:if test="${not empty error}">
+            <c:if test="${not empty sessionScope.error}">
                 <script>
                     Swal.fire({
                         icon: 'error',
                         title: 'ERROR!',
-                        text: '${error}',
+                        text: '${sessionScope.error}',
                     })
                 </script>
                 <c:remove var="error" scope="session"/>
             </c:if>
         </div>
     </div>
+
     <div class="inner_container">
         <!-- navigation -->
         <jsp:include page="admin/Component/navigationV2.jsp"/>

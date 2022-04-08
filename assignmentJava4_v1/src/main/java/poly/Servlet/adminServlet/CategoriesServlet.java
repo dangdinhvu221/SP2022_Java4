@@ -98,6 +98,7 @@ public class CategoriesServlet extends HttpServlet {
     }
 
     private void doCreateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        validateForm(request, response);
         try {
             Category category = new Category();
             BeanUtils.populate(category, request.getParameterMap());
@@ -127,5 +128,14 @@ public class CategoriesServlet extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("error", "Error: " + e.getMessage());
         }
+    }
+
+    private void validateForm(HttpServletRequest request, HttpServletResponse response){
+        String name = request.getParameter("nameCategory");
+
+        if(name.length() == 0){
+            request.setAttribute("error", "Can not be empty!!!");
+        }
+
     }
 }

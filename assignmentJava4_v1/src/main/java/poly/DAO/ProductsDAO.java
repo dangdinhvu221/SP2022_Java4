@@ -2,11 +2,14 @@ package poly.DAO;
 
 import poly.Entity.Products;
 import poly.Entity.Supplier;
+import poly.Entity.Users;
 import poly.Utils.jpaUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsDAO implements shopDao<Products, Integer>{
@@ -111,4 +114,18 @@ public class ProductsDAO implements shopDao<Products, Integer>{
             throw e;
         }
     }
+
+
+
+//    public Products getProduct(Integer key) {
+//        try {
+//            entityManager = jpaUtils.getEntityManager();
+//            entityTransaction = entityManager.getTransaction();
+//            return entityManager.find(Products.class, key);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            throw e;
+//        }
+//    }
+
 }

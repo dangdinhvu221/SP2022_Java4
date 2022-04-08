@@ -16,6 +16,7 @@ public class Products {
     private String title;
     private Timestamp lastUpdate;
     private Timestamp created;
+    private int category_id;
     private Category categoryByCategoryId;
     private Supplier supplierBySupplierId;
 
@@ -191,4 +192,6 @@ public class Products {
     public void setSupplierBySupplierId(Supplier supplierBySupplierId) {
         this.supplierBySupplierId = supplierBySupplierId;
     }
+
+
 }

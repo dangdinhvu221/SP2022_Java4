@@ -78,6 +78,11 @@ public class ForgotPasswordServlet extends HttpServlet {
     }
 
     private void doforgotPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String emailTo = request.getParameter("email");
+
+        if(emailTo.length()  == 0){
+            request.setAttribute("error", "Email isEmpty!!!");
+        }
         final String usernmae = "dangdinhvu221@gmail.com";
         final String password = "vu123456";
 
@@ -93,7 +98,6 @@ public class ForgotPasswordServlet extends HttpServlet {
             }
         });
 
-        String emailTo = request.getParameter("email");
         HttpSession session1 = request.getSession();
         session1.setAttribute("emailTo", emailTo);
         request.setAttribute("emailTo", emailTo);
@@ -119,7 +123,6 @@ public class ForgotPasswordServlet extends HttpServlet {
             request.setAttribute("error", "ERROR: " + e.getMessage());
             e.printStackTrace();
         }
-        request.setAttribute("views", "/views/admin/Login/forGotPassword.jsp");
-        request.getRequestDispatcher("/views/admin/Login/index.jsp").forward(request, response);
+        response.sendRedirect("/assignmentJava4_v1_war_exploded/ForgotPasswordServlet");
     }
 }

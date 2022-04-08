@@ -6,20 +6,6 @@
 <div class="limiter">
     <div class="row">
         <div class="col">
-            <c:if test="${not empty sessionScope.message}">
-                <script>
-                    Swal.fire({
-                        icon: "success",
-                        title: "SuccessFully!",
-                        text: "${sessionScope.message}",
-                        showConfirmButton: false,
-                        closeOnClickOutside: false,
-                        allowOutsideClick: false,
-                        timer: 1600,
-                    });
-                </script>
-                <c:remove var="message" scope="session"/>
-            </c:if>
             <c:if test="${not empty sessionScope.error}">
                 <script>
                     Swal.fire({
