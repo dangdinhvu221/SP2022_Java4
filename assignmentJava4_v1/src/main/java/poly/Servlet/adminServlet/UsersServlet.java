@@ -9,9 +9,6 @@ import poly.Utils.EncryptUtils;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.ws.rs.HttpMethod;
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -29,6 +26,8 @@ import java.util.List;
         "/AdminServlet/resetUser",
         "/AdminServlet/createUser",
         "/AdminServlet/logout",
+        "/AdminServlet/orders",
+
 })
 @MultipartConfig
 public class UsersServlet extends HttpServlet {
@@ -54,16 +53,17 @@ public class UsersServlet extends HttpServlet {
             this.doDeleteUser(request, response);
         } else if (uri.contains("profile")) {
             request.setAttribute("views", "/views/admin/ManagerUser/profile.jsp");
-        }else if(uri.contains("logout")){
+        } else if (uri.contains("logout")) {
             HttpSession session = request.getSession();
-            session.setAttribute("profile_list", new Users());
-            session.removeAttribute("profile_list");
+            session.removeAttribute("users");
+            session.setAttribute("users", new Users());
+//            response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet");
+        }else if (uri.contains("orders")){
+
         }
         request.setAttribute("modal", "views/admin/ManagerUser/modal.jsp");
         request.getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
-
-
 
 
     @Override
@@ -81,6 +81,11 @@ public class UsersServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
+
+    private void doUpdateOrderStates(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
 
     private void doUpdateUser(HttpServletRequest request, HttpServletResponse response) {
         validateForm(request, response);
@@ -128,7 +133,14 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void doInsertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String password = request.getParameter("password");
+        String rePassword = request.getParameter("repassword");
         validateForm(request, response);
+        if (password.length() == 0 || rePassword.length() == 0) {
+            request.setAttribute("error", "Can not be empty!!!");
+        } else if (!password.equals(rePassword)) {
+            request.setAttribute("error", "Check your password!!!");
+        }
         String method = request.getMethod();
         if (method.equalsIgnoreCase("POST")) {
             try {
@@ -144,7 +156,7 @@ public class UsersServlet extends HttpServlet {
 
                 user.setAvatar(photoFile.getName());
                 user.setStatus(true);
-                String encryptedPass  = EncryptUtils.encrypt(request.getParameter("password"));
+                String encryptedPass = EncryptUtils.encrypt(request.getParameter("password"));
                 user.setPassword(encryptedPass);
                 Date date = new Date();
                 Timestamp ts = new Timestamp(date.getTime());
@@ -188,18 +200,15 @@ public class UsersServlet extends HttpServlet {
         this.findAll(request, response);
     }
 
-    private void validateForm(HttpServletRequest request, HttpServletResponse response){
+    private void validateForm(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        String password = request.getParameter("password");
-        String rePassword = request.getParameter("rePassword");
-        String avatar = request.getParameter("avatar");
 
-        if(username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
-                phone.length() == 0 || password.length() == 0 || rePassword.length() == 0 || avatar.length() == 0){
+        if (username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
+                phone.length() == 0) {
             request.setAttribute("error", "Can not be empty!!!");
         }
 

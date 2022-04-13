@@ -37,21 +37,6 @@
 </div>
 
 <div class=" table-responsive">
-    <div class="row">
-        <div class="col-lg-8"></div>
-        <!-- Another variation with a button -->
-        <div class="input-group col-lg-4 mb-4">
-            <label>
-                <input type="text" oninput="searchByName(this)" class="form-control" name="search"
-                       placeholder="Search this blog">
-            </label>
-            <div class="input-group-append">
-                <button type="button"  class="btn btn-secondary">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </div>
     <table class="table table-bordered table-hove sortable">
         <div class="row">
             <button class="btn btn-info col-2 m-5" data-toggle="modal" data-target="#myModalCreateCategory">Create
@@ -78,22 +63,22 @@
                 </td>
                 <td>
                     <button type="button"
-                            class="btn btn-outline-danger fw-bold btn-block" id="deleteUser" onclick="alertWarningDelete()">
+                            class="btn btn-outline-danger fw-bold btn-block" id="deleteUser" onclick="alertWarningDelete(${item.id})">
                         Delete
                     </button>
                 </td>
             </tr>
             <script>
                 var alertWarningDelete = document.querySelector("#deleteUser");
-                alertWarningDelete = function () {
+                alertWarningDelete = function (id) {
                     Swal.fire({
                         title: 'Warning?',
-                        text: "Do you want to delete this user?!",
+                        text: "Do you want to delete this Category?!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#dd3333',
-                        confirmButtonText: '<a href="CategoryServlet/deleteCategory?id=${item.id}" class = "text-light">Yes, Delete it!</a>'
+                        confirmButtonText: '<a href="CategoryServlet/deleteCategory?id='+id+'" class = "text-light">Yes, Delete it!</a>'
                     })
                 }
             </script>
@@ -105,7 +90,7 @@
                         <div class="modal-content form-elegant">
                             <div class="modal-header text-center bg-info">
                                 <h3 class="modal-title w-100 text-dark font-weight-bold my-3" id="myModal">
-                                    <strong> Category Create
+                                    <strong> Category Update
                                         <img src="${pageContext.request.contextPath}/views/admin/images/logo/iconload.gif" alt="" width="10%"/>
                                     </strong>
                                 </h3>
@@ -124,7 +109,6 @@
                                 </div>
                                 <div class="md-form">
                                     <div class="form-group">
-                                            <%--                        <label for="user_id">User ID:</label>--%>
                                         <input type="hidden" class="form-control"  name="user_id" value="${item.user_id}" id="user_id" aria-describedby="helpId"
                                                placeholder=""
                                                required/>
@@ -132,7 +116,7 @@
                                 </div>
                                 <div class="text-center mb-3">
                                     <button formaction="CategoryServlet/updateCategory?id=${item.id}" class="btn btn-info btn-block btn-rounded z-depth-1a">
-                                        Create Category
+                                        Update Category
                                     </button>
                                 </div>
                             </form>

@@ -1,7 +1,7 @@
 package poly.Entity.order;
 
 public class FlowOrder {
-    private int o_id, idP, o_quantity, price, total, status;
+    private int o_id, idP, o_quantity, price, total, status, u_id;
     private String imageProduct, nameProduct, size, color;
 
     public FlowOrder() {
@@ -18,6 +18,28 @@ public class FlowOrder {
         this.nameProduct = nameProduct;
         this.size = size;
         this.color = color;
+    }
+
+    public FlowOrder(int o_id, int u_id ,int idP, String imageProduct, String nameProduct, String size, String color, int o_quantity, int price, int total, int status) {
+        this.o_id = o_id;
+        this.u_id = u_id;
+        this.idP = idP;
+        this.o_quantity = o_quantity;
+        this.price = price;
+        this.total = total;
+        this.status = status;
+        this.imageProduct = imageProduct;
+        this.nameProduct = nameProduct;
+        this.size = size;
+        this.color = color;
+    }
+
+    public int getU_id() {
+        return u_id;
+    }
+
+    public void setU_id(int u_id) {
+        this.u_id = u_id;
     }
 
     public int getO_id() {

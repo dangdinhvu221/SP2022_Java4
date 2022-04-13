@@ -202,10 +202,9 @@ public class ProductServlet extends HttpServlet {
         String price = request.getParameter("price");
         String color = request.getParameter("color");
         String size = request.getParameter("size");
-        String image = request.getParameter("imageProduct");
 
         if(name.length() == 0 || quantity.length() == 0 || price.length() == 0 || color.length() == 0 ||
-                size.length() == 0 || image.length() == 0){
+                size.length() == 0){
             request.setAttribute("error", "Can not be empty!!!");
         }
 

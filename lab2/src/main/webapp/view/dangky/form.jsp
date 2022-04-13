@@ -14,7 +14,7 @@
 
 <body class="container">
 <h1 class="alert alert-success">Đăng Ký</h1>
-<form action="DangKyServlet" method="post">
+<form action="DangKyServlet" method="get">
     <div class="mb-3">
         <label for="input1" class="form-label">Username: </label>
         <input name="username" type="text" class="form-control" id="input1" aria-describedby="textHelp">

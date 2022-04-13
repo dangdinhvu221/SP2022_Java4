@@ -41,23 +41,22 @@
                        class="btn btn-outline-secondary fw-bold">Edit</a>
                 </td>
                 <td>
-                    <button
-                            class="btn btn-outline-danger fw-bold " id="deleteUser" onclick="alertWarningDelete()">
+                    <button class="btn btn-outline-danger fw-bold " id="deleteUser" onclick="alertWarningDelete(${item.id})">
                         Delete
                     </button>
                 </td>
             </tr>
             <script>
                 var alertWarningDelete = document.querySelector("#deleteUser");
-                alertWarningDelete = function () {
+                alertWarningDelete = function (id) {
                     Swal.fire({
                         title: 'Warning?',
-                        text: "Do you want to delete this user?!",
+                        text: "Do you want to delete this Product?!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#dd3333',
-                        confirmButtonText: '<a href="ProductServlet/deleteProduct?id=${item.id}" class = "text-light">Yes, Delete it!</a>'
+                        confirmButtonText: '<a href="ProductServlet/deleteProduct?id='+id+'" class = "text-light">Yes, Delete it!</a>'
                     })
                 }
             </script>

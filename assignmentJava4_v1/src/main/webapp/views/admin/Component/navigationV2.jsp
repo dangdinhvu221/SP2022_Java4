@@ -82,6 +82,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="OrderControlServlet"> <span><i class="fa fa-user-circle-o" aria-hidden="true"></i> Manager Orders</span></a>
+                    </li>
                 </ul>
             </li>
             <li>

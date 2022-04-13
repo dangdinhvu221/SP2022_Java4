@@ -1,5 +1,8 @@
 package poly.Entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.persistence.*;
 
 @Entity
@@ -56,5 +59,24 @@ public class Category {
         int result = id;
         result = 31 * result + (nameCategory != null ? nameCategory.hashCode() : 0);
         return result;
+    }
+
+    private static final Log log  = LogFactory.getLog(Category.class);
+
+    @PostPersist
+    public void dem(){
+        log.info("Add Category: " + nameCategory + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("Update Category: " + nameCategory + "With id: " + id);
+
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("Remove Category: " + nameCategory + "With id: " + id);
+
     }
 }

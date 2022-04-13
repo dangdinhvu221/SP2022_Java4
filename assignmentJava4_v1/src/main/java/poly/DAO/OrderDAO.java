@@ -124,13 +124,12 @@ public class OrderDAO implements shopDao<Orders, Integer> {
 
     public Order insertOrder(Order order) {
         try {
-
             String jdbcURL = "jdbc:sqlserver://localhost;database=AssignmentJava4";
             String dbUser = "sa";
             String dbPassword = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-            String sql = "insert into orders(product_id, user_id, oder_quantity, date, statusState) values(?,?,?,?,?)";
+            String sql = "insert into orders(product_id, user_id, order_quantity, date, orderStates) values(?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, order.getOrderId());
             statement.setInt(2, order.getUid());
@@ -138,13 +137,9 @@ public class OrderDAO implements shopDao<Orders, Integer> {
             statement.setString(4, order.getDate());
             statement.setInt(5, order.getStatusState());
             statement.executeUpdate();
-            System.out.println("done-----------------------------------");
-
             connection.close();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("error------------------------------------");
-
         }
         return order;
     }
@@ -157,21 +152,64 @@ public class OrderDAO implements shopDao<Orders, Integer> {
             String dbPassword = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-            String sql = "SELECT orders.id, p.id, imageProduct, nameProduct, size, color, oder_quantity, price, (price*orders.oder_quantity) as total, statusState FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.statusState = oS.id where user_id = ? and statusState = 1";
+            String sql = "SELECT orders.id, p.id, imageProduct, nameProduct, size, color, order_quantity, price, (price*orders.order_quantity) as total, orderStates FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.orderStates = oS.id where user_id = ? and orderStates = 1 ORDER BY orders.id Desc";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new FlowOrder(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10)));
             }
-            System.out.println("done-----------------------------------");
             connection.close();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("error------------------------------------");
             throw e;
         }
     }
 
+
+    public List<FlowOrder> findAllOrders() throws SQLException, ClassNotFoundException {
+        List<FlowOrder> list = new ArrayList<>();
+        try {
+            String jdbcURL = "jdbc:sqlserver://localhost;database=AssignmentJava4";
+            String dbUser = "sa";
+            String dbPassword = "123";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+            String sql = "SELECT orders.id, user_id, p.id, imageProduct, nameProduct, size, color, order_quantity, price, (price*orders.order_quantity) as total, orderStates FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.orderStates = oS.id  where (oS.id = 1 or oS.id = 2) ORDER BY orders.id Desc";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new FlowOrder(rs.getInt(1), rs.getInt(2),rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getInt(11)));
+            }
+            connection.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public List<FlowOrder> historyOrders(Integer id) throws SQLException, ClassNotFoundException {
+        List<FlowOrder> list = new ArrayList<>();
+        try {
+            String jdbcURL = "jdbc:sqlserver://localhost;database=AssignmentJava4";
+            String dbUser = "sa";
+            String dbPassword = "123";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+            String sql = "SELECT orders.id, user_id, p.id, imageProduct, nameProduct, size, color, order_quantity, price, (price*orders.order_quantity) as total, orderStates FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.orderStates = oS.id where user_id = ? and (oS.id = 2 or oS.id = 3 or oS.id = 4)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new FlowOrder(rs.getInt(1), rs.getInt(2),rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getInt(11)));
+            }
+            connection.close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

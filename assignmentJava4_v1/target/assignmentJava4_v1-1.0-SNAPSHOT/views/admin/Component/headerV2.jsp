@@ -55,6 +55,7 @@
                             <div class="dropdown-menu">
                                 <c:choose>
                                     <c:when test="${users.username != null}">
+                                        <a class="dropdown-item" href="HomePagesServlet" id="profile">Home Pages</a>
                                         <a class="dropdown-item" href="AdminServlet/profile" id="profile">My Profile</a>
                                         <hr>
                                         <a class="dropdown-item" href="">Settings</a>

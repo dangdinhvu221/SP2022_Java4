@@ -17,9 +17,28 @@ public class Products {
     private Timestamp lastUpdate;
     private Timestamp created;
     private int category_id;
+    private int supplier_id;
     private Category categoryByCategoryId;
     private Supplier supplierBySupplierId;
 
+
+    public Products(int id, String nameProduct, int category_id, int supplier_id, int quantity, int price, String color, String size, String imageProduct, String description, String title) {
+        this.id = id;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.price = price;
+        this.color = color;
+        this.size = size;
+        this.imageProduct = imageProduct;
+        this.description = description;
+        this.title = title;
+        this.category_id = category_id;
+        this.supplier_id = supplier_id;
+    }
+
+    public Products() {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

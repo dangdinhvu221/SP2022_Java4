@@ -18,7 +18,9 @@
                 <div class="col-sm-5 col-md-3">
                     <form action="#" class="search-wrap">
                         <div class="form-group">
-                            <input type="search" class="form-control search" placeholder="Search">
+                            <label>
+                                <input oninput="searchByName(this)" name="search" value="${txtSearch}" type="search" class="form-control search" placeholder="Search">
+                            </label>
                             <button class="btn btn-primary submit-search text-center" type="submit"><i
                                     class="icon-search"></i></button>
                         </div>
@@ -59,8 +61,12 @@
                             <c:choose>
                                 <c:when test="${users.username != null}">
                                     <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/views/user/profile/profileUser.jsp"
+                                       href="HomePagesServlet/profile"
                                        id="profile">My Profile</a>
+                                    <hr>
+                                    <a class="dropdown-item"
+                                       href="OrderControlServlet/historyOrder"
+                                       id="profile">History Orders</a>
                                     <hr>
                                     <a class="dropdown-item" href="HomePagesServlet/help">Help</a>
                                     <a class="dropdown-item" href="HomePagesServlet/logout"><span>Log Out</span> <i
@@ -72,7 +78,7 @@
                                 </c:when>
                             </c:choose>
                         </div>
-                        <li class="cart"><a href="CartServlet"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+                        <li class="cart"><a href="CartServlet"><i class="icon-shopping-cart"></i> Cart [${count}]</a></li>
                     </ul>
                 </div>
             </div>

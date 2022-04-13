@@ -12,6 +12,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,10 @@ public class HomePagesServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
         String uri = request.getRequestURI();
-        if (uri.contains("register")) {
+        if (uri.contains("profile")) {
+            request.setAttribute("views", "/views/admin/ManagerUser/profile.jsp");
+            request.getRequestDispatcher("/views/user/detailsProducts/indexDeltaProduct.jsp").forward(request, response);
+        } else if (uri.contains("register")) {
             request.getRequestDispatcher("/views/user/register/registerForm.jsp").forward(request, response);
         } else if (uri.contains("contact")) {
             request.setAttribute("views", "/views/user/component/contact.jsp");
@@ -54,7 +58,12 @@ public class HomePagesServlet extends HttpServlet {
         } else if (uri.contains("login")) {
             request.getRequestDispatcher("/views/user/loginFormHomePage/loginHomePage.jsp").forward(request, response);
         } else if (uri.contains("HomePagesServlet")) {
-            this.doHomePages(request, response);
+            try {
+                pagingPage(request,response);
+//                this.doHomePages(request, response);
+            } catch (Exception throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 
@@ -78,13 +87,13 @@ public class HomePagesServlet extends HttpServlet {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+
             if (username.length() == 0 || password.length() == 0) {
                 session.setAttribute("error", "Username or password cannot be empty!!!");
-//                response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/login");
             }
             Users users = usersDAO.findKeywordUser(username.trim());
             boolean checkPass = EncryptUtils.check(password, users.getPassword());
-            if (checkPass) {
+            if (checkPass == true) {
                 session.setAttribute("users", users);
                 session.setAttribute("message", "Login successfully !");
                 response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet");
@@ -93,12 +102,13 @@ public class HomePagesServlet extends HttpServlet {
                 response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/login");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            session.setAttribute("error", "Wrong user or password");
             response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/login");
+            e.printStackTrace();
         }
     }
 
-    private void doHomePages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void doHomePages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         List<Products> list = productsDAO.findAll();
         request.setAttribute("list_products", list);
         request.getRequestDispatcher("/views/HomePage.jsp").forward(request, response);
@@ -114,8 +124,8 @@ public class HomePagesServlet extends HttpServlet {
         String rePassword = request.getParameter("rePassword");
         HttpSession session = request.getSession();
 
-        if(username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
-                phone.length() == 0 || password.length() == 0 || rePassword.length() == 0){
+        if (username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
+                phone.length() == 0 || password.length() == 0 || rePassword.length() == 0) {
             session.setAttribute("error", "Can not be empty!!!");
             response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/register");
             return;
@@ -145,8 +155,39 @@ public class HomePagesServlet extends HttpServlet {
         }
     }
 
-    private void validateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+    private void pagingPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+       try {
+           String indexPage = request.getParameter("index");
+           if (indexPage == null) {
+               indexPage = "1";
+           }
+           int index = Integer.parseInt(indexPage);
+           ProductsDAO listProductsDAO = new ProductsDAO();
+           int count = listProductsDAO.getTotalProducts();
+           int endPage = count / 3;
+           if (count % 3 != 0) {
+               endPage++;
+           }
+           List<Products> list = listProductsDAO.pagingAccount(index);
+           request.setAttribute("listA", list);
+           request.setAttribute("endP", endPage);
+           request.setAttribute("tag", index);
+           findAllProducts(request, response);
+           this.doHomePages(request, response);
+       }catch (Exception e) {
+           e.printStackTrace();
+       }
     }
+
+    protected void findAllProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            ProductsDAO listProductsDAO = new ProductsDAO();
+            List<Products> listP = listProductsDAO.findAll();
+            request.setAttribute("list_products", listP);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Error: " + e.getMessage());
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ public class Orders {
     }
 
     @Basic
-    @Column(name = "oder_quantity", nullable = true)
+    @Column(name = "order_quantity", nullable = true)
     public Integer getOderQuantity() {
         return oderQuantity;
     }
@@ -63,7 +63,7 @@ public class Orders {
     }
 
     @ManyToOne
-    @JoinColumn(name = "statusState", referencedColumnName = "id")
+    @JoinColumn(name = "orderStates", referencedColumnName = "id")
     public OrderStates getOrdersByOrderId() {
         return ordersByOrderId;
     }

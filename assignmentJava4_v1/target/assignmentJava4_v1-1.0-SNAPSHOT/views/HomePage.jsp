@@ -41,11 +41,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/css/bootstrap-datepicker.css">
     <!-- Flaticons  -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/fonts/flaticon/font/flaticon.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Theme style  -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/css/style.css">
-<%--    <base href="/assignmentJava4_v1_war_exploded/">--%>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <base href="/assignmentJava4_v1_war_exploded/">
 </head>
 <body>
 
@@ -94,8 +95,10 @@
     <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 </div>
 
+
 <!-- jQuery -->
 <script src="${pageContext.request.contextPath}/views/user/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- popper -->
 <script src="${pageContext.request.contextPath}/views/user/js/popper.min.js"></script>
 <!-- bootstrap 4.1 -->
@@ -116,7 +119,47 @@
 <!-- Stellar Parallax -->
 <script src="${pageContext.request.contextPath}/views/user/js/jquery.stellar.min.js"></script>
 <!-- Main -->
+
 <script src="${pageContext.request.contextPath}/views/user/js/main.js"></script>
+
+<script>
+    function loadMore() {
+        var amount = document.getElementsByClassName("product").length;
+        $.ajax({
+            url: "${pageContext.request.contextPath}/loadMoreControlServlet",
+            type: "get", //send it through get method
+            data: {
+                exits: amount
+            },
+            success: function (data) {
+                var row = document.getElementById("content");
+                row.innerHTML += data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function searchByName(param) {
+        let txtSearch = param.value;
+        $.ajax({
+            url: "${pageContext.request.contextPath}/searchAjaxServlet",
+            type: "get", //send it through get method
+            data: {
+                search: txtSearch
+            },
+            success: function (data) {
+                var row = document.getElementById("content");
+                row.innerHTML = data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+</script>
+
 
 </body>
 </html>

@@ -11,10 +11,11 @@ import java.io.IOException;
 
 @WebFilter(filterName = "AuthenticationFilter",
         urlPatterns = {
-//                "/AdminServlet/*",
-//                "/ProductServlet/*",
-//                "/CategoryServlet/*",
-//                "/SupplierServlet/*",
+                "/AdminServlet/*",
+                "/ProductServlet/*",
+                "/CategoryServlet/*",
+                "/SupplierServlet/*",
+                "/OrderControlServlet/*",
         })
 public class AuthenticationFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
@@ -30,10 +31,9 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-        Users user =  (Users) session.getAttribute("profile_list");
-
+        Users user =  (Users) session.getAttribute("users");
         if(user == null) {
-            resp.sendRedirect("/assignmentJava4_v1_war_exploded/LoginControlServlet");
+            resp.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/login");
             return;
         }
         chain.doFilter(request, response);

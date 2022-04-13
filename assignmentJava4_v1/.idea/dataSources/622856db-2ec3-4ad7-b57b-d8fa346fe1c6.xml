@@ -264,7 +264,7 @@
 1189579276|||0|execute|G
 1189579276|||2|execute|D
 </Grants>
-      <IntrospectionTimestamp>2022-04-08.19:32:34.357</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2022-04-11.23:06:52.370</IntrospectionTimestamp>
       <Current>1</Current>
       <DescriptionsCheckSum>5533242433</DescriptionsCheckSum>
     </schema>
@@ -365,17 +365,17 @@
     <table id="66" parent="47" name="orderStates">
       <ObjectId>338100245</ObjectId>
       <CreatedTimestamp>2022-04-08.18:59:05.220</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.19:32:33.790</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.023</ModifiedTimestamp>
     </table>
     <table id="67" parent="47" name="orders">
-      <ObjectId>18099105</ObjectId>
-      <CreatedTimestamp>2022-04-08.16:08:54.097</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.19:02:19.793</ModifiedTimestamp>
+      <ObjectId>690101499</ObjectId>
+      <CreatedTimestamp>2022-04-11.23:06:52.013</CreatedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.047</ModifiedTimestamp>
     </table>
     <table id="68" parent="47" name="products">
       <ObjectId>677577452</ObjectId>
       <CreatedTimestamp>2022-03-29.17:00:59.880</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.16:08:54.327</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.023</ModifiedTimestamp>
     </table>
     <table id="69" parent="47" name="share">
       <ObjectId>837578022</ObjectId>
@@ -398,7 +398,7 @@ int</ExtendedProperties>
     <table id="72" parent="47" name="users">
       <ObjectId>581577110</ObjectId>
       <CreatedTimestamp>2022-03-29.17:00:59.867</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.16:08:54.327</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.023</ModifiedTimestamp>
     </table>
     <routine id="73" parent="47" name="fn_diagramobjects">
       <ObjectId>1189579276</ObjectId>
@@ -610,23 +610,23 @@ int</ExtendedProperties>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="101" parent="67" name="product_id">
+    <column id="101" parent="67" name="order_quantity">
       <Position>2</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="102" parent="67" name="user_id">
+    <column id="102" parent="67" name="date">
       <Position>3</Position>
-      <DataType>int|0s</DataType>
+      <DataType>nvarchar(50 char)|0s</DataType>
     </column>
-    <column id="103" parent="67" name="oder_quantity">
+    <column id="103" parent="67" name="user_id">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="104" parent="67" name="date">
+    <column id="104" parent="67" name="product_id">
       <Position>5</Position>
-      <DataType>nvarchar(50 char)|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="105" parent="67" name="statusState">
+    <column id="105" parent="67" name="orderStates">
       <Position>6</Position>
       <DataType>int|0s</DataType>
     </column>
@@ -641,38 +641,38 @@ int</ExtendedProperties>
       <Unique>1</Unique>
     </index>
     <key id="108" parent="67" name="orders_pk">
-      <ObjectId>66099276</ObjectId>
-      <CreatedTimestamp>2022-04-08.16:08:54.410</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.16:08:54.410</ModifiedTimestamp>
+      <ObjectId>754101727</ObjectId>
+      <CreatedTimestamp>2022-04-11.23:06:52.043</CreatedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.043</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>orders_pk</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="109" parent="67" name="orders_fk_Product_id">
-      <ObjectId>34099162</ObjectId>
-      <CreatedTimestamp>2022-04-08.16:08:54.323</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.16:08:54.323</ModifiedTimestamp>
-      <ColNames>product_id</ColNames>
-      <RefTableId>677577452</RefTableId>
-      <RefTableName>products</RefTableName>
-      <RefKeyName>PK__products__3213E83F12888C95</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="110" parent="67" name="orders_fk_Users_id">
-      <ObjectId>50099219</ObjectId>
-      <CreatedTimestamp>2022-04-08.16:08:54.327</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.16:08:54.327</ModifiedTimestamp>
+    <foreign-key id="109" parent="67" name="orders_fk_Users_id">
+      <ObjectId>706101556</ObjectId>
+      <CreatedTimestamp>2022-04-11.23:06:52.020</CreatedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.020</ModifiedTimestamp>
       <ColNames>user_id</ColNames>
       <RefTableId>581577110</RefTableId>
       <RefTableName>users</RefTableName>
       <RefKeyName>PK__users__3213E83FA9568AFC</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
+    <foreign-key id="110" parent="67" name="orders_fk_Product_id">
+      <ObjectId>722101613</ObjectId>
+      <CreatedTimestamp>2022-04-11.23:06:52.023</CreatedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.023</ModifiedTimestamp>
+      <ColNames>product_id</ColNames>
+      <RefTableId>677577452</RefTableId>
+      <RefTableName>products</RefTableName>
+      <RefKeyName>PK__products__3213E83F12888C95</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
     <foreign-key id="111" parent="67" name="orders___fk_OrderState_id">
-      <ObjectId>386100416</ObjectId>
-      <CreatedTimestamp>2022-04-08.19:02:19.793</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-08.19:02:19.793</ModifiedTimestamp>
-      <ColNames>statusState</ColNames>
+      <ObjectId>738101670</ObjectId>
+      <CreatedTimestamp>2022-04-11.23:06:52.023</CreatedTimestamp>
+      <ModifiedTimestamp>2022-04-11.23:06:52.023</ModifiedTimestamp>
+      <ColNames>orderStates</ColNames>
       <RefTableId>338100245</RefTableId>
       <RefTableName>orderStates</RefTableName>
       <RefKeyName>orderStates_pk</RefKeyName>

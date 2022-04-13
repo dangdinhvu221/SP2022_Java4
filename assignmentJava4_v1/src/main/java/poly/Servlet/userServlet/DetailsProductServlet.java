@@ -26,34 +26,29 @@ public class DetailsProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameter("description") + "----------------------------");
-
         String uri = request.getRequestURI();
         if (uri.contains("DetailsProductServlet")) {
             this.doDeltaProduct(request, response);
-            processRequest1(request, response);
+            AddToCart(request, response);
         }
         request.getRequestDispatcher("/views/user/detailsProducts/indexDeltaProduct.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        AddToCart(request, response);
     }
 
     private void doDeltaProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Products products = productsDAO.findByID(id);
         request.setAttribute("products", products);
-        CategoriesDAO categoriesDAO = new CategoriesDAO();
         request.setAttribute("views", "/views/user/detailsProducts/detailsProduct.jsp");
     }
 
-    protected void processRequest1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void AddToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
-        Products products = productsDAO.findByID(Integer.parseInt(id));
-//        products.setQuantity(Integer.parseInt(request.getParameter("quantity")));
         Cookie arr[] = request.getCookies();
         String txt = "";
         for (Cookie o : arr) {
@@ -71,6 +66,8 @@ public class DetailsProductServlet extends HttpServlet {
         Cookie c = new Cookie("id", txt);
         c.setMaxAge(60 * 60 * 24);
         response.addCookie(c);
+
+        request.setAttribute("views", "/views/user/detailsProducts/detailsProduct.jsp");
     }
 
 }
