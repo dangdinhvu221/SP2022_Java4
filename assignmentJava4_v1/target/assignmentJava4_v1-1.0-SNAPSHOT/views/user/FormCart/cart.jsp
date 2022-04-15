@@ -73,26 +73,27 @@
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc d-flex justify-content-between align-items-center">
-                                        <span class="input-group-btn">
-                                            <a href="SubControlServlet?id=${item.id}" class="btn btn-sm">
-                                                <i class="icon-minus2"></i>
+                                           <span class="input-group-btn ml-1">
+                                            <a href="CartControlServlet?id=${item.id}" class="btn btn-sm">
+                                                 <i class="icon-plus2"></i>
                                             </a>
-                    		            </span>
+                                        </span>
+                                        <label for="quantity"></label>
                                         <input type="number" id="quantity" name="quantity"
                                                width="100px"
                                                class="form-control input-number"
                                                value="${item.quantity}"
                                                min="1" max="100">
-                                        <span class="input-group-btn ml-1">
-                                            <a href="CartControlServlet?id=${item.id}" class="btn btn-sm">
-                                                 <i class="icon-plus2"></i>
+                                        <span class="input-group-btn">
+                                            <a href="SubControlServlet?id=${item.id}" class="btn btn-sm">
+                                                <i class="icon-minus2"></i>
                                             </a>
-                                        </span>
+                    		            </span>
                                     </div>
                                 </div>
                                 <div class="one-eight text-center">
                                     <div class="display-tc">
-                                        <a href="CartServlet/remove?id=${item.id}" class="closed"></a>
+                                        <a href="removeCart?id=${item.id}" class="closed"></a>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +160,8 @@
                     <div class="block-27">
                         <ul>
                             <c:forEach var="item" begin="1" end="${endP}">
-                                <li class="${tag == item ? "active" : ""}"><a href="CartServlet?index=${item}">${item}</a></li>
+                                <li class="${tag == item ? "active" : ""}"><a
+                                        href="CartServlet?index=${item}">${item}</a></li>
                             </c:forEach>
                         </ul>
                     </div>

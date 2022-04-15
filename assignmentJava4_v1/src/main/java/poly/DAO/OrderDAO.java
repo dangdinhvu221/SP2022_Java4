@@ -133,7 +133,7 @@ public class OrderDAO implements shopDao<Orders, Integer> {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, order.getOrderId());
             statement.setInt(2, order.getUid());
-            statement.setInt(3, order.getQuantity());
+            statement.setInt(3, order.getOrder_quantity());
             statement.setString(4, order.getDate());
             statement.setInt(5, order.getStatusState());
             statement.executeUpdate();

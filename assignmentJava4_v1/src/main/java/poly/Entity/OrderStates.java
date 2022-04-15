@@ -1,9 +1,9 @@
 package poly.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.persistence.*;
 
 @Entity
 public class OrderStates {
@@ -48,5 +48,24 @@ public class OrderStates {
         int result = id;
         result = 31 * result + (nameStates != null ? nameStates.hashCode() : 0);
         return result;
+    }
+
+    private static final Log log  = LogFactory.getLog(OrderStates.class);
+
+    @PostPersist
+    public void Create(){
+        log.info("Add OrderStates: " + nameStates + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("Update OrderStates: " + nameStates + "With id: " + id);
+
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("Remove OrderStates: " + nameStates + "With id: " + id);
+
     }
 }

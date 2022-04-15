@@ -1,0 +1,6 @@
+2022-04-15 13:21:43 INFO  Orders:116 - remove Orders: 0-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@80364bda-poly.Entity.OrderStates@626e2128With id: 3
+2022-04-15 13:21:46 INFO  Orders:116 - remove Orders: 0-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@9880f865-poly.Entity.OrderStates@626e2128With id: 2
+2022-04-15 13:21:49 INFO  Orders:116 - remove Orders: 0-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@653c2295-poly.Entity.OrderStates@626e2128With id: 1
+2022-04-15 13:34:31 INFO  Orders:110 - update Orders: 3-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@9b4f6d7d-poly.Entity.OrderStates@ab87ea95With id: 7
+2022-04-15 13:34:36 INFO  Orders:110 - update Orders: 2-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@1a517769-poly.Entity.OrderStates@3e61bdd7With id: 6
+2022-04-15 13:41:55 INFO  Supplier:85 - Add Supplier: Hu?n Hoa H?ng-0999999999-Hà n?i-With id: 5

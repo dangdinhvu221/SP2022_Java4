@@ -1,5 +1,8 @@
 package poly.Entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.persistence.*;
 
 @Entity
@@ -73,5 +76,22 @@ public class Supplier {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
+    }
+
+    private static final Log log  = LogFactory.getLog(Supplier.class);
+
+    @PostPersist
+    public void Create(){
+        log.info("Add Supplier: " + nameSupplier + "-" + phone + "-" + address + "-" + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("Update Supplier: " + nameSupplier + "-" + phone + "-" + address + "-" + "With id: " + id);
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("Remove Supplier: " + nameSupplier + "-" + phone + "-" + address + "-" + "With id: " + id);
     }
 }

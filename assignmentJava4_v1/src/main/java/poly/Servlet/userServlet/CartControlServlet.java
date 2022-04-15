@@ -29,13 +29,12 @@ public class CartControlServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
         Cookie arr[] = request.getCookies();
-        String quantity = request.getParameter("quantity");
-        Products product = new Products();
         String txt = "";
         for (Cookie o : arr) {
             if (o.getName().equals("id")) {
@@ -52,6 +51,20 @@ public class CartControlServlet extends HttpServlet {
         Cookie c = new Cookie("id", txt);
         c.setMaxAge(60 * 60 * 24);
         response.addCookie(c);
+
+        HttpSession session = request.getSession();
+        List<Products> listCart = (List<Products>) request.getSession().getAttribute("list_cart");
+
+        int total = (int) request.getSession().getAttribute("total");
+        for (Products o : listCart) {
+            total = total + o.getQuantity() * o.getPrice();
+        }
+
+        session.setAttribute("list_cart ", listCart);
+//        session.setAttribute("count", count);
+        session.setAttribute("total", total);
+        session.setAttribute("vat", 0.1 * total);
+        session.setAttribute("sum", (0.1 * total) + total);
 
         response.sendRedirect("/assignmentJava4_v1_war_exploded/CartServlet");
     }

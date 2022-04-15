@@ -5,17 +5,17 @@ import poly.Entity.Products;
 public class Order extends Products {
     private int orderId;
     private int uid;
-    private int quantity;
+    private int order_quantity;
     private String date;
     private int statusState;
 
     public Order() {
     }
 
-    public Order(int orderId, int uid, int quantity, String date, int statusState) {
+    public Order(int orderId, int uid, int order_quantity, String date, int statusState) {
         this.orderId = orderId;
         this.uid = uid;
-        this.quantity = quantity;
+        this.order_quantity = order_quantity;
         this.date = date;
         this.statusState = statusState;
     }
@@ -36,13 +36,12 @@ public class Order extends Products {
         this.uid = uid;
     }
 
-    @Override
-    public Integer getQuantity() {
-        return quantity;
+    public int getOrder_quantity() {
+        return order_quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setOrder_quantity(int order_quantity) {
+        this.order_quantity = order_quantity;
     }
 
     public String getDate() {

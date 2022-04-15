@@ -1,9 +1,9 @@
 package poly.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -49,5 +49,24 @@ public class Favorite {
         int result = id;
         result = 31 * result + (likeDate != null ? likeDate.hashCode() : 0);
         return result;
+    }
+
+    private static final Log log  = LogFactory.getLog(Favorite.class);
+
+    @PostPersist
+    public void Create(){
+        log.info("Add Favorite: " + likeDate + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("Update Category: " + likeDate + "With id: " + id);
+
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("Remove Category: " + likeDate + "With id: " + id);
+
     }
 }

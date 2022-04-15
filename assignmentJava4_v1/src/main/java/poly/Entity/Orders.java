@@ -1,5 +1,8 @@
 package poly.Entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.persistence.*;
 
 @Entity
@@ -93,5 +96,23 @@ public class Orders {
         result = 31 * result + (oderQuantity != null ? oderQuantity.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
+    }
+
+    private static final Log log  = LogFactory.getLog(Orders.class);
+
+    @PostPersist
+    public void Create(){
+        log.info("Add Orders: " + oderQuantity + "-" + date + "-" +usersByUserId + "-" +productsByProductId + "-" +ordersByOrderId + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("update Orders: " + oderQuantity + "-" + date + "-" +usersByUserId + "-" +productsByProductId + "-" +ordersByOrderId + "With id: " + id);
+
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("remove Orders: " + oderQuantity + "-" + date + "-" +usersByUserId + "-" +productsByProductId + "-" +ordersByOrderId + "With id: " + id);
     }
 }

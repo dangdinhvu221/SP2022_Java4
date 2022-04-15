@@ -1,6 +1,7 @@
 package poly.Servlet.userServlet;
 
 import poly.DAO.ProductsDAO;
+import poly.Entity.Cart;
 import poly.Entity.Products;
 
 import javax.servlet.*;
@@ -14,17 +15,17 @@ import java.util.List;
 @WebServlet({
         "/CartServlet",
         "/CartServlet/AddToCart",
-        "/CartServlet/remove",
-
 })
 public class CartServlet extends HttpServlet {
-    private ProductsDAO productsDAO;
+    private final ProductsDAO productsDAO;
     private List<Products> list;
+    private List<Cart> listCart;
 
 
     public CartServlet() {
         productsDAO = new ProductsDAO();
         list = new ArrayList<Products>();
+        listCart = new ArrayList<>();
     }
 
     @Override
@@ -33,17 +34,14 @@ public class CartServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String uri = request.getRequestURI();
-
         if (uri.contains("CartServlet")) {
-            pagingPage(request, response);
             processRequest(request, response);
+            pagingPage(request, response);
         } else if (uri.contains("AddToCart")) {
             processRequest(request, response);
             pagingPage(request, response);
         }
-        if (uri.contains("remove")) {
-            removeCart(request, response);
-        }
+
         request.setAttribute("views", "/views/user/FormCart/cart.jsp");
         request.getRequestDispatcher("/views/user/detailsProducts/indexDeltaProduct.jsp").forward(request, response);
     }
@@ -51,9 +49,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if (uri.contains("remove")) {
-            removeCart(request, response);
-        } else if (uri.contains("AddToCart")) {
+        if (uri.contains("AddToCart")) {
             processRequest(request, response);
             pagingPage(request, response);
         }
@@ -66,52 +62,55 @@ public class CartServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession();
-        Cookie arr[] = request.getCookies();
+        Cookie[] arr = request.getCookies();
         String quantity = request.getParameter("quantity");
         Products product = new Products();
+        Cart cart = new Cart();
         int count = 0;
         for (Cookie o : arr) {
             if (o.getName().equals("id")) {
-                String txt[] = o.getValue().split("-");
+                String[] txt = o.getValue().split("-");
                 for (String s : txt) {
+                    product = productsDAO.findByID(Integer.parseInt(s));
+                    cart.setId(product.getId());
+                    cart.setPrice(product.getPrice());
+                    cart.setImageProduct(product.getImageProduct());
+                    cart.setNameProduct(product.getNameProduct());
                     if (quantity != null) {
-                        product = productsDAO.findByID(Integer.parseInt(s));
-                        product.setQuantity(0);
-                        list.add(product);
-                        count++;
-                        session.setAttribute("count", count);
-                    } else {
-                        product = productsDAO.findByID(Integer.parseInt(s));
-                        list.add(product);
+                        cart.setQuantity(0);
+//                        product.setQuantity(0);
                     }
+                    listCart.add(cart);
+                    count++;
                 }
             }
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getId() == list.get(j).getId()) {
-                    list.remove(j);
+        for (int i = 0; i < listCart.size(); i++) {
+            for (int j = i + 1; j < listCart.size(); j++) {
+                if (listCart.get(i).getId() == listCart.get(j).getId()) {
+                    listCart.remove(j);
                     j--;
                 }
             }
             if (quantity != null) {
-                if (list.get(i).getId() == Integer.parseInt(request.getParameter("id"))) {
-                    list.get(i).setQuantity(list.get(i).getQuantity() + Integer.parseInt(quantity));
+                if (listCart.get(i).getId() == Integer.parseInt(request.getParameter("id"))) {
+                    listCart.get(i).setQuantity(listCart.get(i).getQuantity() + Integer.parseInt(quantity));
                 }
             }
         }
 
         int total = 0;
-        for (Products o : list) {
+        for (Products o : listCart) {
             total = total + o.getQuantity() * o.getPrice();
         }
-        request.setAttribute("list_cart", list);
-        request.setAttribute("total", total);
-        request.setAttribute("vat", 0.1 * total);
-        request.setAttribute("sum", (0.1 * total) + total);
+        session.setAttribute("count", count);
+        session.setAttribute("list_cart", listCart);
+        session.setAttribute("total", total);
+        session.setAttribute("vat", 0.1 * total);
+        session.setAttribute("sum", (0.1 * total) + total);
     }
 
     private void pagingPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -145,46 +144,6 @@ public class CartServlet extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("error", "Error: " + e.getMessage());
         }
-    }
-
-    protected void removeCart(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-//        findAllProducts(request, response);
-//
-        String id = request.getParameter("id");
-        System.out.println(id +"------------------------------------------------------");
-        Cookie arr[] = request.getCookies();
-        String txt = "";
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                txt = txt + o.getValue();
-                o.setMaxAge(0);
-                response.addCookie(o);
-            }
-        }
-        String ids[] = txt.split("-");
-        String txtOutPut = "";
-        int check = 0;
-        for (int i = 0; i < ids.length; i++) {
-            if (!ids[i].equals(id)) {
-                if (txtOutPut.isEmpty()) {
-                    txtOutPut = ids[i];
-                } else {
-                    txtOutPut = txtOutPut + "-" + ids[i];
-                }
-            }
-        }
-//        if (!txtOutPut.isEmpty()) {
-//            Cookie c = new Cookie("id", txtOutPut);
-//            c.setMaxAge(60 * 60 * 24);
-//            response.addCookie(c);
-//        }
-        Products products = productsDAO.findByID(Integer.parseInt(id));
-        for (Products product : list) {
-            list.remove(product);
-        }
-        request.setAttribute("list_cart ", list);
     }
 
 }

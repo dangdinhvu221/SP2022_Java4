@@ -1,5 +1,8 @@
 package poly.Entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -177,5 +180,22 @@ public class Users {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    private static final Log log  = LogFactory.getLog(Users.class);
+
+    @PostPersist
+    public void Create(){
+        log.info("Add Users: " + username +"-" +  password +"-" +  fullName + "-" + phone + "-" + address + "-" + email +"-" +  gender +"-" +  avatar +"-" +  created +"-" +  role +"-" +  status + "-" + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("Update Users: " + username +"-" +  password +"-" +  fullName + "-" + phone + "-" + address + "-" + email +"-" +  gender +"-" +  avatar +"-" +  created +"-" +  role +"-" +  status + "-" + "With id: " + id);
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("Remove Users: " + username +"-" +  password +"-" +  fullName + "-" + phone + "-" + address + "-" + email +"-" +  gender +"-" +  avatar +"-" +  created +"-" +  role +"-" +  status + "-" + "With id: " + id);
     }
 }

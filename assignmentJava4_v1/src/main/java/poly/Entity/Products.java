@@ -1,5 +1,8 @@
 package poly.Entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -212,5 +215,21 @@ public class Products {
         this.supplierBySupplierId = supplierBySupplierId;
     }
 
+    private static final Log log  = LogFactory.getLog(Products.class);
+
+    @PostPersist
+    public void Create(){
+        log.info("Add Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
+    }
+
+    @PostUpdate
+    public void update(){
+        log.info("Update Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
+    }
+
+    @PostRemove
+    public void remove(){
+        log.info("Remove Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
+    }
 
 }

@@ -64,7 +64,7 @@ public class Category {
     private static final Log log  = LogFactory.getLog(Category.class);
 
     @PostPersist
-    public void dem(){
+    public void Create(){
         log.info("Add Category: " + nameCategory + "With id: " + id);
     }
 
