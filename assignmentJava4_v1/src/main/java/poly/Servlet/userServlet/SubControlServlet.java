@@ -36,17 +36,51 @@ public class SubControlServlet extends HttpServlet {
         int total = (int) request.getSession().getAttribute("total");
         int amount = 0;
         for (Cart o : list) {
-            if(o.getId() == Integer.parseInt(id)){
+            if (o.getId() == Integer.parseInt(id)) {
                 amount = o.getQuantity();
                 amount--;
                 o.setQuantity(amount);
             }
-
             total = total + o.getQuantity() * o.getPrice();
         }
+        try {
+            Cookie[] arr = request.getCookies();
+            String txt = "";
+            for (Cart c : list) {
+                if (c.getQuantity() <= 0) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals("id")) {
+                            txt += o.getValue();
+                            o.setMaxAge(0);
+                            response.addCookie(o);
+                        }
+                    }
+                    list.remove(c);
+                }
+            }
+            String[] ids = txt.split("-");
+            String txtOutPut = "";
+            for (int i = 0; i < ids.length; i++) {
+                if (!ids[i].equals(id)) {
+                    if (txtOutPut.isEmpty()) {
+                        txtOutPut = ids[i];
+                    } else {
+                        txtOutPut = txtOutPut + "-" + ids[i];
+                    }
+                }
+            }
+            if (!txtOutPut.isEmpty()) {
+                Cookie c = new Cookie("id", txtOutPut);
+                c.setMaxAge(60 * 60 * 24);
+                response.addCookie(c);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         session.setAttribute("amount", amount);
-        System.out.println(amount +"----------------------------------------------");
+        System.out.println(amount + "----------------------------------------------");
         session.setAttribute("list_cart ", list);
 //        session.setAttribute("count", count);
         session.setAttribute("total", total);

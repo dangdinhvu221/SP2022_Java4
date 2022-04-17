@@ -51,7 +51,6 @@ public class RemoProductCartServlet extends HttpServlet {
                 o.setMaxAge(0);
                 response.addCookie(o);
                 count--;
-
             }
         }
         String[] ids = txt.split("-");
