@@ -1,7 +1,7 @@
 package poly.Servlet.userServlet;
 
 import poly.DAO.ProductsDAO;
-import poly.Entity.Products;
+import poly.Entity.order.Cart;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,11 +13,11 @@ import java.util.List;
 @WebServlet(name = "CartControlServlet", value = "/CartControlServlet")
 public class CartControlServlet extends HttpServlet {
     private ProductsDAO productsDAO;
-    private List<Products> list;
+    private List<Cart> list;
 
     public CartControlServlet() {
         productsDAO = new ProductsDAO();
-        list = new ArrayList<Products>();
+        list = new ArrayList<Cart>();
     }
 
     @Override
@@ -33,34 +33,23 @@ public class CartControlServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
-        Cookie arr[] = request.getCookies();
-        String txt = "";
-        for (Cookie o : arr) {
-            if (o.getName().equals("id")) {
-                txt = txt + o.getValue();
-                o.setMaxAge(0);
-                response.addCookie(o);
-            }
-        }
-        if (txt.isEmpty()) {
-            txt = id;
-        } else {
-            txt = txt + "-" + id;
-        }
-        Cookie c = new Cookie("id", txt);
-        c.setMaxAge(60 * 60 * 24);
-        response.addCookie(c);
-
         HttpSession session = request.getSession();
-        List<Products> listCart = (List<Products>) request.getSession().getAttribute("list_cart");
-
+        list = (List<Cart>) request.getSession().getAttribute("list_cart");
+        String id = request.getParameter("id");
         int total = (int) request.getSession().getAttribute("total");
-        for (Products o : listCart) {
+        int amount = 0;
+        for (Cart o : list) {
+            if(o.getId() == Integer.parseInt(id)){
+                amount = o.getQuantity();
+                amount++;
+                o.setQuantity(amount);
+            }
+
             total = total + o.getQuantity() * o.getPrice();
         }
-
-        session.setAttribute("list_cart ", listCart);
+        session.setAttribute("amount", amount);
+        System.out.println(amount +"----------------------------------------------");
+        session.setAttribute("list_cart ", list);
 //        session.setAttribute("count", count);
         session.setAttribute("total", total);
         session.setAttribute("vat", 0.1 * total);

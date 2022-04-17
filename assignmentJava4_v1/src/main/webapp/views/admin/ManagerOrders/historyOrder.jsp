@@ -41,7 +41,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Shopping Checkout</span></p>
+                    <p class="bread"><span><a href="HomePagesServlet">Home</a></span> / <span>History Orders</span></p>
                 </div>
             </div>
         </div>

@@ -36,9 +36,26 @@
         </div>
     </div>
     <div class=" table-responsive">
+        <div class="form-group row">
+            <label class="col-7">
+                <select name="statusOrder" class="custom-select text-center">
+                    <c:forEach var="i" items="${orderStates}">
+                        <option value="${i.id}">${i.nameStates}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <div class="col-5">
+                <button formaction="OrderControlServlet/update"
+                        class="btn btn-outline-danger btn-block fw-bold">
+                    Update
+                </button>
+            </div>
+        </div>
         <table class="table table-bordered table-hove sortable">
             <thead class="table-dark">
             <tr>
+
+                <th>Check Box <input type="checkbox" name="select-all" id="select-all"></th>
                 <th>ID_Order</th>
                 <th>ID_User</th>
                 <th>ImageProduct</th>
@@ -49,12 +66,14 @@
                 <th>price</th>
                 <th>total</th>
                 <th>status</th>
-                <th>Manipulation</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${orders_list}" var="item">
                 <tr>
+                    <td class="text-center">
+                        <input type="checkbox" name="idOrder" value="${item.o_id}">
+                    </td>
                     <td>${item.o_id}</td>
                     <td>${item.u_id}</td>
                     <td><img src="uploads/${item.imageProduct}" alt="" class="img-responsive img-thumbnail"
@@ -66,19 +85,10 @@
                     <td>${item.price}</td>
                     <td>${item.total}</td>
                     <td>
-                        <label>
-                            <select name="statusOrder" class="custom-select">
-                                <c:forEach var="i" items="${orderStates}">
-                                    <option value="${i.id}">${i.nameStates}</option>
-                                </c:forEach>
-                            </select>
-                        </label>
-                    </td>
-                    <td>
-                        <button formaction="OrderControlServlet/update?id=${item.o_id}"
-                                class="btn btn-outline-danger fw-bold">
-                            Update
-                        </button>
+                        <c:choose>
+                            <c:when test="${item.status == 1}">Chờ xác nhận</c:when>
+                            <c:when test="${item.status == 2}">Chờ lấy hàng</c:when>
+                        </c:choose>
                     </td>
                 </tr>
             </c:forEach>
@@ -86,7 +96,7 @@
         </table>
     </div>
 </form>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function loadMore() {
         var amount = document.getElementsByClassName("product").length;
@@ -123,4 +133,17 @@
             }
         });
     }
+
+    $('#select-all').click(function (event) {
+        if (this.checked) {
+            // Iterate each checkbox
+            $(':checkbox').each(function () {
+                this.checked = true;
+            });
+        } else {
+            $(':checkbox').each(function () {
+                this.checked = false;
+            });
+        }
+    });
 </script>

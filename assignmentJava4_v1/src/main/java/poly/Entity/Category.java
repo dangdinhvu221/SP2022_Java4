@@ -61,6 +61,15 @@ public class Category {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", nameCategory='" + nameCategory + '\'' +
+                ", user_id=" + user_id +
+                '}';
+    }
+
     private static final Log log  = LogFactory.getLog(Category.class);
 
     @PostPersist

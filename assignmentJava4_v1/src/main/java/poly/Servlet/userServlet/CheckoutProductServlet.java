@@ -2,8 +2,8 @@ package poly.Servlet.userServlet;
 
 import poly.DAO.OrderDAO;
 import poly.DAO.ProductsDAO;
-import poly.DAO.UsersDAO;
 import poly.Entity.*;
+import poly.Entity.order.Cart;
 import poly.Entity.order.FlowOrder;
 import poly.Entity.order.Order;
 
@@ -85,6 +85,22 @@ public class CheckoutProductServlet extends HttpServlet {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
             Cookie arr[] = request.getCookies();
+//            Products product = new Products();
+//            Cart cart = new Cart();
+//            for (Cookie o : arr) {
+//                if (o.getName().equals("id")) {
+//                    String txt[] = o.getValue().split("-");
+//                    for (String s : txt) {
+//                        if (s != null) {
+//                            product = productsDAO.findByID(Integer.parseInt(s));
+//                            cart.setId(product.getId());
+//                            cart.setPrice(product.getPrice());
+//                            cart.setImageProduct(product.getImageProduct());
+//                            cart.setNameProduct(product.getNameProduct());
+//                        }
+//                    }
+//                }
+//            }
 
             Users auth = (Users) request.getSession().getAttribute("users");
             for (Cart p : listCart) {
@@ -107,8 +123,10 @@ public class CheckoutProductServlet extends HttpServlet {
                 if (o.getName().equals("id")) {
                     o.setMaxAge(0);
                     response.addCookie(o);
+                    listCart.clear();
                 }
             }
+            session.setAttribute("list_cart", listCart);
             session.setAttribute("count", 0);
             session.setAttribute("message", "Ordering successfully!");
             response.sendRedirect("/assignmentJava4_v1_war_exploded/CheckoutProductServlet");

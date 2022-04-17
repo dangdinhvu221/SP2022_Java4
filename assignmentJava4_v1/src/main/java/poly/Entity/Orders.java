@@ -98,6 +98,18 @@ public class Orders {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id=" + id +
+                ", oderQuantity=" + oderQuantity +
+                ", date='" + date + '\'' +
+                ", usersByUserId=" + usersByUserId +
+                ", productsByProductId=" + productsByProductId +
+                ", ordersByOrderId=" + ordersByOrderId +
+                '}';
+    }
+
     private static final Log log  = LogFactory.getLog(Orders.class);
 
     @PostPersist

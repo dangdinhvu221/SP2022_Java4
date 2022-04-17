@@ -182,6 +182,24 @@ public class Users {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender=" + gender +
+                ", avatar='" + avatar + '\'' +
+                ", created=" + created +
+                ", role=" + role +
+                ", status=" + status +
+                '}';
+    }
+
     private static final Log log  = LogFactory.getLog(Users.class);
 
     @PostPersist
@@ -198,4 +216,6 @@ public class Users {
     public void remove(){
         log.info("Remove Users: " + username +"-" +  password +"-" +  fullName + "-" + phone + "-" + address + "-" + email +"-" +  gender +"-" +  avatar +"-" +  created +"-" +  role +"-" +  status + "-" + "With id: " + id);
     }
+
+
 }

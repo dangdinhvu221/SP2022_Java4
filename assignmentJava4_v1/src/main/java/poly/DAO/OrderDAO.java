@@ -198,7 +198,7 @@ public class OrderDAO implements shopDao<Orders, Integer> {
             String dbPassword = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-            String sql = "SELECT orders.id, user_id, p.id, imageProduct, nameProduct, size, color, order_quantity, price, (price*orders.order_quantity) as total, orderStates FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.orderStates = oS.id where user_id = ? and (oS.id = 2 or oS.id = 3 or oS.id = 4)";
+            String sql = "SELECT orders.id, user_id, p.id, imageProduct, nameProduct, size, color, order_quantity, price, (price*orders.order_quantity) as total, orderStates FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.orderStates = oS.id where user_id = ?  ORDER BY orders.id desc";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

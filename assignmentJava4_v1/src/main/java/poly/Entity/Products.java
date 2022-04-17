@@ -215,6 +215,27 @@ public class Products {
         this.supplierBySupplierId = supplierBySupplierId;
     }
 
+    @Override
+    public String toString() {
+        return "Products{" +
+                "id=" + id +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", imageProduct='" + imageProduct + '\'' +
+                ", description='" + description + '\'' +
+                ", title='" + title + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", created=" + created +
+                ", category_id=" + category_id +
+                ", supplier_id=" + supplier_id +
+                ", categoryByCategoryId=" + categoryByCategoryId +
+                ", supplierBySupplierId=" + supplierBySupplierId +
+                '}';
+    }
+
     private static final Log log  = LogFactory.getLog(Products.class);
 
     @PostPersist
@@ -231,5 +252,6 @@ public class Products {
     public void remove(){
         log.info("Remove Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
     }
+
 
 }

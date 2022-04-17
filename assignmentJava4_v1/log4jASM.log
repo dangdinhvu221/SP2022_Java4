@@ -4,3 +4,41 @@
 2022-04-15 13:34:31 INFO  Orders:110 - update Orders: 3-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@9b4f6d7d-poly.Entity.OrderStates@ab87ea95With id: 7
 2022-04-15 13:34:36 INFO  Orders:110 - update Orders: 2-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@1a517769-poly.Entity.OrderStates@3e61bdd7With id: 6
 2022-04-15 13:41:55 INFO  Supplier:85 - Add Supplier: Hu?n Hoa H?ng-0999999999-Hà n?i-With id: 5
+2022-04-15 15:39:08 INFO  Orders:110 - update Orders: 3-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@448d1f68-poly.Entity.OrderStates@ab87ea95With id: 12
+2022-04-15 15:40:02 INFO  Orders:110 - update Orders: 1-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@80364bda-poly.Entity.OrderStates@bcf9dcc5With id: 11
+2022-04-15 15:45:44 INFO  Users:194 - Update Users: nguoidung3-$2a$10$t3PQzmzdRh5GaTqFdDaztOSa0YrXvGEYsH4eQg/5j6BRMpQp6QBUW-ng??i dùng 3-0123456788-Hà n?i-nguoidung3@gmail.com-false- -2022-04-13 11:58:42.76-false-true-With id: 48
+2022-04-15 22:03:24 INFO  Users:189 - Add Users: -$2a$10$tIjEZsARxfrXRN3yv.BWiuCQjwJH7aIDUzdvkmq71BiQp7vAxRSLS-----true-logoChucLy.png-2022-04-15 22:03:23.901-false-true-With id: 49
+2022-04-15 22:04:36 INFO  Users:189 - Add Users: vuddph14036-$2a$10$i1M9y3pYudRvBXZoC2tpxeR/.1XkzB7skJ9Xa4Ud/aXT33Xj5oKCW-??ng ?ình V?-0965528854-Hà n?i-vuddph14036@fpt.edu.vn-true-logoChucLy.png-2022-04-15 22:04:36.406-false-true-With id: 50
+2022-04-15 22:05:12 INFO  Users:199 - Remove Users: -$2a$10$tIjEZsARxfrXRN3yv.BWiuCQjwJH7aIDUzdvkmq71BiQp7vAxRSLS-----true-logoChucLy.png-2022-04-15 22:03:23.9-false-true-With id: 49
+2022-04-15 22:05:27 INFO  Users:199 - Remove Users: vuddph14036-$2a$10$i1M9y3pYudRvBXZoC2tpxeR/.1XkzB7skJ9Xa4Ud/aXT33Xj5oKCW-??ng ?ình V?-0965528854-Hà n?i-vuddph14036@fpt.edu.vn-true-logoChucLy.png-2022-04-15 22:04:36.407-false-true-With id: 50
+2022-04-15 22:26:21 INFO  Users:189 - Add Users: vuddph14036-$2a$10$NsgFmQ1tolrGphvjPo8rkeHAMiL9.8xbgarlkn/SxORV2ijLY2vsC-??ng ?ình V?-0965528854-Hà n?i-vuddph14036@fpt.edu.vn-true-78cbb57670c4bc9ae5d56.jpg-2022-04-15 22:26:21.255-false-true-With id: 51
+2022-04-15 22:28:15 INFO  Users:189 - Add Users: vuddph14036-$2a$10$i3Btp3ueYSod2lTAr1TAOOfBlPhHtSAz51Foa7M6BtXYoY8XiNkvS-??ng ?ình V?-0965528854-Hà n?i-vuddph14036@fpt.edu.vn-true-d48e36d6f3643f3a66755.jpg-2022-04-15 22:28:15.34-false-true-With id: 52
+2022-04-15 22:28:26 INFO  Users:199 - Remove Users: vuddph14036-$2a$10$i3Btp3ueYSod2lTAr1TAOOfBlPhHtSAz51Foa7M6BtXYoY8XiNkvS-??ng ?ình V?-0965528854-Hà n?i-vuddph14036@fpt.edu.vn-true-d48e36d6f3643f3a66755.jpg-2022-04-15 22:28:15.34-false-true-With id: 52
+2022-04-15 22:28:33 INFO  Users:199 - Remove Users: vuddph14036-$2a$10$NsgFmQ1tolrGphvjPo8rkeHAMiL9.8xbgarlkn/SxORV2ijLY2vsC-??ng ?ình V?-0965528854-Hà n?i-vuddph14036@fpt.edu.vn-true-78cbb57670c4bc9ae5d56.jpg-2022-04-15 22:26:21.257-false-true-With id: 51
+2022-04-15 23:07:14 INFO  Orders:110 - update Orders: 1-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@80364bda-poly.Entity.OrderStates@ab87ea95With id: 14
+2022-04-15 23:07:15 INFO  Orders:110 - update Orders: 4-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@448d1f68-poly.Entity.OrderStates@ab87ea95With id: 13
+2022-04-15 23:07:15 INFO  Orders:110 - update Orders: 3-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@78cec92-poly.Entity.OrderStates@ab87ea95With id: 10
+2022-04-15 23:07:15 INFO  Orders:110 - update Orders: 1-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@448d1f68-poly.Entity.OrderStates@ab87ea95With id: 9
+2022-04-15 23:07:16 INFO  Orders:110 - update Orders: 5-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@653c2295-poly.Entity.OrderStates@ab87ea95With id: 8
+2022-04-15 23:08:16 INFO  Orders:110 - update Orders: 8-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@a0dc7592-poly.Entity.OrderStates@3e61bdd7With id: 5
+2022-04-15 23:08:17 INFO  Orders:110 - update Orders: 6-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@80364bda-poly.Entity.OrderStates@3e61bdd7With id: 4
+2022-04-15 23:08:53 INFO  Orders:110 - update Orders: 2-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@1a517769-poly.Entity.OrderStates@ab87ea95With id: 6
+2022-04-15 23:08:54 INFO  Orders:110 - update Orders: 8-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@a0dc7592-poly.Entity.OrderStates@ab87ea95With id: 5
+2022-04-15 23:08:54 INFO  Orders:110 - update Orders: 6-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@80364bda-poly.Entity.OrderStates@ab87ea95With id: 4
+2022-04-15 23:54:08 INFO  Orders:110 - update Orders: 3-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@9880f865-poly.Entity.OrderStates@3e61bdd7With id: 16
+2022-04-16 23:44:43 INFO  Orders:110 - update Orders: 7-2022-04-16-poly.Entity.Users@91df2437-poly.Entity.Products@1a517769-poly.Entity.OrderStates@3e61bdd7With id: 19
+2022-04-16 23:44:44 INFO  Orders:110 - update Orders: 5-2022-04-16-poly.Entity.Users@91df2437-poly.Entity.Products@448d1f68-poly.Entity.OrderStates@3e61bdd7With id: 18
+2022-04-16 23:44:44 INFO  Orders:110 - update Orders: 3-2022-04-16-poly.Entity.Users@91df2437-poly.Entity.Products@80364bda-poly.Entity.OrderStates@3e61bdd7With id: 17
+2022-04-16 23:44:45 INFO  Orders:110 - update Orders: 1-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@78cec92-poly.Entity.OrderStates@3e61bdd7With id: 15
+2022-04-16 23:44:56 INFO  Orders:110 - update Orders: 5-2022-04-16-poly.Entity.Users@91df2437-poly.Entity.Products@448d1f68-poly.Entity.OrderStates@bcf9dcc5With id: 18
+2022-04-16 23:44:56 INFO  Orders:110 - update Orders: 3-2022-04-15-poly.Entity.Users@91df2437-poly.Entity.Products@9880f865-poly.Entity.OrderStates@bcf9dcc5With id: 16
+2022-04-17 18:03:31 INFO  Users:199 - Remove Users: nguoidung2-$2a$10$J13XiMUjVyhDUlTWgZ9Bre/GsOikoxsgDeSzlhtP/fS2k96hmHPSG-ng??i dùng 2-0123456785-Hà n?i-nguoidung2@gmail.com-true-person2.jpg-2022-04-13 11:55:25.95-false-true-With id: 47
+2022-04-17 18:03:42 INFO  Users:199 - Remove Users: nguoidung2-$2a$10$y8YDCaTenI6pDRpKWXFQFOuC7SqLCnubj9uGgkiYRXW4m6GgwNbIi-ng??i dùng 2-0123456785--nguoidung2@gmail.com-true-person2.jpg-2022-04-13 11:54:11.107-false-true-With id: 46
+2022-04-17 18:03:50 INFO  Users:199 - Remove Users: nguoidung2-$2a$10$dQkT47geYVN7bGhrZPnTC.YPjZk0CmFvdnuiI6Z3kpXez4Qf5tAem-ng??i dùng 2-0123456785-Hà n?i-nguoidung2@gmail.com-true-person2.jpg-2022-04-13 11:53:49.777-false-true-With id: 45
+2022-04-17 18:04:27 INFO  Users:194 - Update Users: nguoidung3-$2a$10$t3PQzmzdRh5GaTqFdDaztOSa0YrXvGEYsH4eQg/5j6BRMpQp6QBUW-ng??i dùng 3-0123456788-Hà n?i-nguoidung3@gmail.com-false-f178334d8275482b11641.jpg-2022-04-17 18:04:27.765-false-true-With id: 48
+2022-04-17 18:04:59 INFO  Orders:110 - update Orders: 6-2022-04-17-poly.Entity.Users@db82e21-poly.Entity.Products@1a517769-poly.Entity.OrderStates@3e61bdd7With id: 23
+2022-04-17 18:04:59 INFO  Orders:110 - update Orders: 2-2022-04-17-poly.Entity.Users@db82e21-poly.Entity.Products@9880f865-poly.Entity.OrderStates@3e61bdd7With id: 22
+2022-04-17 18:05:00 INFO  Orders:110 - update Orders: 3-2022-04-17-poly.Entity.Users@db82e21-poly.Entity.Products@448d1f68-poly.Entity.OrderStates@3e61bdd7With id: 21
+2022-04-17 18:05:00 INFO  Orders:110 - update Orders: 4-2022-04-17-poly.Entity.Users@db82e21-poly.Entity.Products@80364bda-poly.Entity.OrderStates@3e61bdd7With id: 20
+2022-04-17 18:09:44 INFO  Users:194 - Update Users: nguoidung3-$2a$10$uev.klafldpCZRI.SdXarexR2yM1QtfHT6pctJNpb/Fq23RDqQ4am-ng??i dùng 3-0123456788-Hà n?i-nguoidung3@gmail.com-false-f178334d8275482b11641.jpg-2022-04-17 18:04:27.767-false-true-With id: 48
+2022-04-17 18:21:42 INFO  Products:248 - Update Products: Vans-Category{id=30, nameCategory='Áo Qu?n', user_id=27}-poly.Entity.Supplier@d178de25-5-150-Brown-42-img_bg_1.jpg-Là m?t trong nh?ng m?u giày ??u tiên c?a hãng giày Vans n?i ti?ng, Vans Authentic ban ??u dành cho các skateboard nh?ng sau ?ó ?ã tr? nên ph? bi?n do s? ti?n d?ng và dáng v? th?i trang c?a chúng.-Vans Authentic – 1966-null-2022-04-17 18:21:42.014With id: 14

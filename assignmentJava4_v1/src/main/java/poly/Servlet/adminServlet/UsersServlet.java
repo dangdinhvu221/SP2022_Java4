@@ -5,6 +5,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import poly.DAO.UsersDAO;
 import poly.Entity.Users;
 import poly.Utils.EncryptUtils;
+import poly.Utils.Validate;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -57,9 +58,6 @@ public class UsersServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.removeAttribute("users");
             session.setAttribute("users", new Users());
-//            response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet");
-        }else if (uri.contains("orders")){
-
         }
         request.setAttribute("modal", "views/admin/ManagerUser/modal.jsp");
         request.getRequestDispatcher("/views/index.jsp").forward(request, response);
@@ -82,16 +80,12 @@ public class UsersServlet extends HttpServlet {
         request.getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
 
-    private void doUpdateOrderStates(HttpServletRequest request, HttpServletResponse response) {
-
-    }
-
-
     private void doUpdateUser(HttpServletRequest request, HttpServletResponse response) {
-        validateForm(request, response);
+
         String method = request.getMethod();
         int id = Integer.parseInt(request.getParameter("id"));
         if (method.equalsIgnoreCase("POST")) {
+//            validateForm(request, response);
             try {
                 File dir = new File(request.getServletContext().getRealPath("/uploads"));
                 if (!dir.exists()) {
@@ -135,14 +129,15 @@ public class UsersServlet extends HttpServlet {
     private void doInsertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String password = request.getParameter("password");
         String rePassword = request.getParameter("repassword");
-        validateForm(request, response);
         if (password.length() == 0 || rePassword.length() == 0) {
             request.setAttribute("error", "Can not be empty!!!");
-        } else if (!password.equals(rePassword)) {
-            request.setAttribute("error", "Check your password!!!");
         }
         String method = request.getMethod();
         if (method.equalsIgnoreCase("POST")) {
+            validateForm(request, response);
+            if (!password.equals(rePassword)) {
+                request.setAttribute("error", "Check your password!!!");
+            }
             try {
                 File dir = new File(request.getServletContext().getRealPath("/uploads"));
                 if (!dir.exists()) {
@@ -165,7 +160,6 @@ public class UsersServlet extends HttpServlet {
                 request.setAttribute("message", "User inserted successfully!");
             } catch (Exception e) {
                 e.printStackTrace();
-//                request.setAttribute("error", "ERROR: " + e.getMessage());
             }
             this.adminUsers(request, response);
         }
@@ -193,8 +187,6 @@ public class UsersServlet extends HttpServlet {
     }
 
     private void adminUsers(HttpServletRequest request, HttpServletResponse response) {
-//        HttpSession session = request.getSession();
-//        session.setAttribute("profile_list", new Users());
         request.setAttribute("tableUsers", "/views/admin/ManagerUser/tableUser.jsp");
         request.setAttribute("views", "/views/admin/ManagerUser/formUsers.jsp");
         this.findAll(request, response);
@@ -206,11 +198,69 @@ public class UsersServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-
-        if (username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
+        if (checkUserName(request, response)) {
+            return;
+        } else if (checkEmailMatch(request, response)) {
+            return;
+        } else if (checkEmailRegex(request, response)) {
+            return;
+        } else if (!checkPhoneRegex(request, response)) {
+            return;
+        } else if (checkPhoneMatch(request, response)) {
+            return;
+        } else if (username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
                 phone.length() == 0) {
             request.setAttribute("error", "Can not be empty!!!");
         }
+    }
 
+    private boolean checkEmailRegex(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String email = request.getParameter("email");
+        if (!Validate.checkEmail(email)) {
+            session.setAttribute("error", "Email Failed!!!");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkEmailMatch(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String email = request.getParameter("email");
+        if (Validate.checkEmailMatch(email)) {
+            session.setAttribute("error", "Trùng Email: " + email);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkPhoneRegex(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String phone = request.getParameter("phone");
+        if (!Validate.checkPhoneNumber(phone)) {
+            session.setAttribute("error", "Phone Failed!!!");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkPhoneMatch(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String phone = request.getParameter("phone");
+        if (Validate.checkPhoneMatch(phone)) {
+            session.setAttribute("error", "Trùng Phone: " + phone);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkUserName(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String username = request.getParameter("username");
+        if (Validate.checkUsername(username)) {
+            session.setAttribute("error", "Trùng username: " + username);
+            return true;
+        }
+        return false;
     }
 }

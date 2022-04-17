@@ -30,6 +30,7 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
+        HttpSession session = request.getSession();
         if (uri.contains("changePassword")) {
             String password = request.getParameter("password");
             String passwordNew = request.getParameter("password-new");
@@ -47,13 +48,13 @@ public class ChangePasswordServlet extends HttpServlet {
                     users.setPassword(encryptedPass);
                     usersDAO.update(users);
                     System.out.println(id);
-                    request.setAttribute("message", "Change Passwords successfully!");
+                    session.setAttribute("message", "Change Passwords successfully!");
                 }catch (Exception e) {
+                    session.setAttribute("error", "Change Passwords failed!!");
                     e.printStackTrace();
                 }
             }
-            request.setAttribute("views", "/views/admin/ManagerUser/profile.jsp");
-            request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+            response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/profile");
         }
     }
 }

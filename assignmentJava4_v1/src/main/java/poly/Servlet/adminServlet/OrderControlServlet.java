@@ -75,16 +75,17 @@ public class OrderControlServlet extends HttpServlet {
 
 
     private void updateStatusOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        String[] idPR = request.getParameterValues("idOrder");
         int status = Integer.parseInt(request.getParameter("statusOrder"));
-        System.out.println(id + "-----------------------------------------------");
-        System.out.println(status + "-----------------------------------------------");
 
-        Orders orders = oDao.findByID(id);
-        OrderStates orderStates = new OrderStates();
-        orderStates.setId(status);
-        orders.setOrdersByOrderId(orderStates);
-        oDao.update(orders);
+        for (String i : idPR) {
+            System.out.println(i);
+            Orders orders = oDao.findByID(Integer.parseInt(i));
+            OrderStates orderStates = new OrderStates();
+            orderStates.setId(status);
+            orders.setOrdersByOrderId(orderStates);
+            oDao.update(orders);
+        }
         this.findAll(request, response);
     }
 

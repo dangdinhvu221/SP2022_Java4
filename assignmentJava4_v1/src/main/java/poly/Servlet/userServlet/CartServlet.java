@@ -1,7 +1,7 @@
 package poly.Servlet.userServlet;
 
 import poly.DAO.ProductsDAO;
-import poly.Entity.Cart;
+import poly.Entity.order.Cart;
 import poly.Entity.Products;
 
 import javax.servlet.*;
@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @WebServlet({
@@ -80,13 +79,13 @@ public class CartServlet extends HttpServlet {
                     cart.setNameProduct(product.getNameProduct());
                     if (quantity != null) {
                         cart.setQuantity(0);
-//                        product.setQuantity(0);
                     }
                     listCart.add(cart);
                     count++;
                 }
             }
         }
+
 
         for (int i = 0; i < listCart.size(); i++) {
             for (int j = i + 1; j < listCart.size(); j++) {
@@ -106,6 +105,7 @@ public class CartServlet extends HttpServlet {
         for (Products o : listCart) {
             total = total + o.getQuantity() * o.getPrice();
         }
+
         session.setAttribute("count", count);
         session.setAttribute("list_cart", listCart);
         session.setAttribute("total", total);

@@ -50,6 +50,14 @@ public class OrderStates {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "OrderStates{" +
+                "id=" + id +
+                ", nameStates='" + nameStates + '\'' +
+                '}';
+    }
+
     private static final Log log  = LogFactory.getLog(OrderStates.class);
 
     @PostPersist
@@ -68,4 +76,5 @@ public class OrderStates {
         log.info("Remove OrderStates: " + nameStates + "With id: " + id);
 
     }
+
 }
