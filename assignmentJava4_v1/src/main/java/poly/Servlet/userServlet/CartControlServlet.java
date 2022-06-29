@@ -44,7 +44,6 @@ public class CartControlServlet extends HttpServlet {
                 amount++;
                 o.setQuantity(amount);
             }
-
             total = total + o.getQuantity() * o.getPrice();
         }
         session.setAttribute("amount", amount);

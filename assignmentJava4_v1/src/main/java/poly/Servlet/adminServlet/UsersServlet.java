@@ -198,17 +198,18 @@ public class UsersServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        if (checkUserName(request, response)) {
-            return;
-        } else if (checkEmailMatch(request, response)) {
-            return;
-        } else if (checkEmailRegex(request, response)) {
-            return;
-        } else if (!checkPhoneRegex(request, response)) {
-            return;
-        } else if (checkPhoneMatch(request, response)) {
-            return;
-        } else if (username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
+//        if (checkUserName(request, response)) {
+//            return;
+//        } else if (checkEmailMatch(request, response)) {
+//            return;
+//        } else if (checkEmailRegex(request, response)) {
+//            return;
+//        } else if (!checkPhoneRegex(request, response)) {
+//            return;
+//        } else if (checkPhoneMatch(request, response)) {
+//            return;
+//        } else
+        if (username.length() == 0 || fullName.length() == 0 || email.length() == 0 || address.length() == 0 ||
                 phone.length() == 0) {
             request.setAttribute("error", "Can not be empty!!!");
         }

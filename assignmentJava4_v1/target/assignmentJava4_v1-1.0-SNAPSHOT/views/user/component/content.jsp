@@ -39,7 +39,8 @@
                     <div class="block-27">
                         <ul>
                             <c:forEach var="item" begin="1" end="${endP}">
-                                <li class="${tag == item ? "active" : ""}"><a href="HomePagesServlet?index=${item}">${item}</a></li>
+                                <li class="${tag == item ? "active" : ""}"><a
+                                        href="HomePagesServlet?index=${item}">${item}</a></li>
                             </c:forEach>
                         </ul>
                     </div>

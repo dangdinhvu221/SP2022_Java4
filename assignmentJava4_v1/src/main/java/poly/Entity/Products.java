@@ -17,7 +17,6 @@ public class Products {
     private String imageProduct;
     private String description;
     private String title;
-    private Timestamp lastUpdate;
     private Timestamp created;
     private int category_id;
     private int supplier_id;
@@ -134,15 +133,6 @@ public class Products {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "lastUpdate", nullable = true)
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
 
     @Basic
     @Column(name = "created", nullable = true)
@@ -173,7 +163,6 @@ public class Products {
         if (description != null ? !description.equals(products.description) : products.description != null)
             return false;
         if (title != null ? !title.equals(products.title) : products.title != null) return false;
-        if (lastUpdate != null ? !lastUpdate.equals(products.lastUpdate) : products.lastUpdate != null) return false;
         if (created != null ? !created.equals(products.created) : products.created != null) return false;
 
         return true;
@@ -190,7 +179,6 @@ public class Products {
         result = 31 * result + (imageProduct != null ? imageProduct.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (lastUpdate != null ? lastUpdate.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         return result;
     }
@@ -227,7 +215,6 @@ public class Products {
                 ", imageProduct='" + imageProduct + '\'' +
                 ", description='" + description + '\'' +
                 ", title='" + title + '\'' +
-                ", lastUpdate=" + lastUpdate +
                 ", created=" + created +
                 ", category_id=" + category_id +
                 ", supplier_id=" + supplier_id +
@@ -240,17 +227,17 @@ public class Products {
 
     @PostPersist
     public void Create(){
-        log.info("Add Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
+        log.info("Add Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title  + "-"+ created + "With id: " + id);
     }
 
     @PostUpdate
     public void update(){
-        log.info("Update Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
+        log.info("Update Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title  + "-"+ created + "With id: " + id);
     }
 
     @PostRemove
     public void remove(){
-        log.info("Remove Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title +  "-"+lastUpdate + "-"+ created + "With id: " + id);
+        log.info("Remove Products: " + nameProduct +  "-"+categoryByCategoryId + "-"+ supplierBySupplierId +  "-"+quantity +  "-"+price +  "-"+color + "-"+ size +  "-"+imageProduct +  "-"+description + "-"+ title  + "-"+ created + "With id: " + id);
     }
 
 

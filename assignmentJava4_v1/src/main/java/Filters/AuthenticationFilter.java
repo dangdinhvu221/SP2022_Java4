@@ -36,6 +36,7 @@ public class AuthenticationFilter implements Filter {
             resp.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet/login");
             return;
         }
+
         chain.doFilter(request, response);
     }
 }

@@ -113,6 +113,20 @@
                                         <span><i class="icon-shopping-cart"></i> Add to Cart</span>
                                     </button>
                                 </p>
+                                <c:choose>
+                                    <c:when test="${idPF == products.id && idU == users.id}">
+                                        <span><a href="favoritesServlet/Unlike?id=${products.id}"
+                                                 class="btn btn-danger">Unlike</a><i class="bi bi-suit-heart"></i></span>
+                                    </c:when>
+                                    <c:when test="${idPF != products.id}">
+                                        <span><a href="favoritesServlet/like?id=${products.id}"
+                                                 class="btn btn-danger">Like</a><i class="bi bi-suit-heart"></i></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                         <span><a href="favoritesServlet/like?id=${products.id}"
+                                                  class="btn btn-outline-danger">Like</a><i class="bi bi-suit-heart"></i></span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>

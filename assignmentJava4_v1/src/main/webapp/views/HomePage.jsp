@@ -44,6 +44,7 @@
 
     <!-- Theme style  -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/user/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <base href="/assignmentJava4_v1_war_exploded/">

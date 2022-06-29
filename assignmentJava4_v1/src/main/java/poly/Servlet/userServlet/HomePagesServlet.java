@@ -3,6 +3,8 @@ package poly.Servlet.userServlet;
 import org.apache.commons.beanutils.BeanUtils;
 import poly.DAO.ProductsDAO;
 import poly.DAO.UsersDAO;
+import poly.DAO.favoritesDAO;
+import poly.Entity.Favorite;
 import poly.Entity.Products;
 import poly.Entity.Users;
 import poly.Utils.EncryptUtils;
@@ -32,6 +34,7 @@ public class HomePagesServlet extends HttpServlet {
     private ProductsDAO productsDAO;
     private UsersDAO usersDAO;
 
+
     public HomePagesServlet() {
         productsDAO = new ProductsDAO();
         usersDAO = new UsersDAO();
@@ -40,7 +43,9 @@ public class HomePagesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        HttpSession session = request.getSession();
+
         String uri = request.getRequestURI();
         if (uri.contains("profile")) {
             request.setAttribute("views", "/views/admin/ManagerUser/profile.jsp");
@@ -51,7 +56,6 @@ public class HomePagesServlet extends HttpServlet {
             request.setAttribute("views", "/views/user/component/contact.jsp");
             request.getRequestDispatcher("/views/user/detailsProducts/indexDeltaProduct.jsp").forward(request, response);
         } else if (uri.contains("logout")) {
-            HttpSession session = request.getSession();
             session.removeAttribute("users");
             session.setAttribute("users", new Users());
             response.sendRedirect("/assignmentJava4_v1_war_exploded/HomePagesServlet");
@@ -59,7 +63,7 @@ public class HomePagesServlet extends HttpServlet {
             request.getRequestDispatcher("/views/user/loginFormHomePage/loginHomePage.jsp").forward(request, response);
         } else if (uri.contains("HomePagesServlet")) {
             try {
-                pagingPage(request,response);
+                pagingPage(request, response);
 //                this.doHomePages(request, response);
             } catch (Exception throwables) {
                 throwables.printStackTrace();
@@ -71,7 +75,7 @@ public class HomePagesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 
         String uri = request.getRequestURI();
         if (uri.contains("login")) {
@@ -109,8 +113,10 @@ public class HomePagesServlet extends HttpServlet {
     }
 
     private void doHomePages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        HttpSession session = request.getSession();
         List<Products> list = productsDAO.findAll();
         request.setAttribute("list_products", list);
+
         request.getRequestDispatcher("/views/HomePage.jsp").forward(request, response);
     }
 
@@ -156,27 +162,27 @@ public class HomePagesServlet extends HttpServlet {
     }
 
     private void pagingPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-       try {
-           String indexPage = request.getParameter("index");
-           if (indexPage == null) {
-               indexPage = "1";
-           }
-           int index = Integer.parseInt(indexPage);
-           ProductsDAO listProductsDAO = new ProductsDAO();
-           int count = listProductsDAO.getTotalProducts();
-           int endPage = count / 3;
-           if (count % 3 != 0) {
-               endPage++;
-           }
-           List<Products> list = listProductsDAO.pagingAccount(index);
-           request.setAttribute("listA", list);
-           request.setAttribute("endP", endPage);
-           request.setAttribute("tag", index);
-           findAllProducts(request, response);
-           this.doHomePages(request, response);
-       }catch (Exception e) {
-           e.printStackTrace();
-       }
+        try {
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            ProductsDAO listProductsDAO = new ProductsDAO();
+            int count = listProductsDAO.getTotalProducts();
+            int endPage = count / 3;
+            if (count % 3 != 0) {
+                endPage++;
+            }
+            List<Products> list = listProductsDAO.pagingAccount(index);
+            request.setAttribute("listA", list);
+            request.setAttribute("endP", endPage);
+            request.setAttribute("tag", index);
+            findAllProducts(request, response);
+            this.doHomePages(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void findAllProducts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

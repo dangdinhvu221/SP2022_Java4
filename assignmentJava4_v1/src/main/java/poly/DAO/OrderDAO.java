@@ -5,6 +5,7 @@ import poly.Entity.Users;
 import poly.Entity.order.FlowOrder;
 import poly.Entity.order.Order;
 import poly.Utils.jpaUtils;
+import poly.jdbcHepler.Hepler;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -193,11 +194,7 @@ public class OrderDAO implements shopDao<Orders, Integer> {
     public List<FlowOrder> historyOrders(Integer id) throws SQLException, ClassNotFoundException {
         List<FlowOrder> list = new ArrayList<>();
         try {
-            String jdbcURL = "jdbc:sqlserver://localhost;database=AssignmentJava4";
-            String dbUser = "sa";
-            String dbPassword = "123";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+            Connection connection = Hepler.getConnection();
             String sql = "SELECT orders.id, user_id, p.id, imageProduct, nameProduct, size, color, order_quantity, price, (price*orders.order_quantity) as total, orderStates FROM orders JOIN users u on u.id = orders.user_id JOIN products p on orders.product_id = p.id JOIN orderStates oS on orders.orderStates = oS.id where user_id = ?  ORDER BY orders.id desc";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);

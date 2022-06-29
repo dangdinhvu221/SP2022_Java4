@@ -3,7 +3,9 @@ package poly.Servlet.userServlet;
 import poly.DAO.CategoriesDAO;
 import poly.DAO.ProductsDAO;
 import poly.DAO.UsersDAO;
+import poly.DAO.favoritesDAO;
 import poly.Entity.Category;
+import poly.Entity.Favorite;
 import poly.Entity.Products;
 import poly.Entity.Users;
 
@@ -19,9 +21,12 @@ import java.util.List;
 })
 public class DetailsProductServlet extends HttpServlet {
     private ProductsDAO productsDAO;
+    private favoritesDAO favoritesDAO;
+
 
     public DetailsProductServlet() {
         productsDAO = new ProductsDAO();
+        favoritesDAO = new favoritesDAO();
     }
 
     @Override
@@ -42,6 +47,25 @@ public class DetailsProductServlet extends HttpServlet {
     private void doDeltaProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Products products = productsDAO.findByID(id);
+//        Users user = (Users) request.getSession().getAttribute("users");
+        try{
+            List<Favorite> listF = favoritesDAO.findAll();
+            int idPF = 0;
+            int idU = 0;
+            for (Favorite f: listF) {
+                if(id == f.getProduct_id().getId()){
+                    idPF = f.getProduct_id().getId();
+                    idU = f.getUser_id().getId();
+                    System.out.println(idPF);
+                    System.out.println(idU);
+                }
+            }
+            request.setAttribute("idPF", idPF);
+            request.setAttribute("idU", idU);
+            request.setAttribute("list_favorites", listF);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         request.setAttribute("products", products);
         request.setAttribute("views", "/views/user/detailsProducts/detailsProduct.jsp");
     }

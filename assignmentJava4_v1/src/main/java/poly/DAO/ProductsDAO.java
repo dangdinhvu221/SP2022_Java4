@@ -1,5 +1,6 @@
 package poly.DAO;
 
+import lombok.extern.log4j.Log4j2;
 import poly.Entity.Products;
 import poly.Entity.Supplier;
 import poly.Entity.Users;
@@ -13,6 +14,7 @@ import javax.persistence.TypedQuery;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ProductsDAO implements shopDao<Products, Integer>{
     private EntityManager entityManager;
@@ -169,4 +171,28 @@ public class ProductsDAO implements shopDao<Products, Integer>{
     }
 
 
+    public void insertExcel(List<Products> entity) {
+        EntityManager em = jpaUtils.getEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            final int numberOfRecords = 30;
+            final int batchSize = 10;
+            for (int i = 0; i <= entity.size() - 1; i++) {
+                em.persist(entity.get(i));
+                if (i % batchSize == 20) {
+                    em.flush();
+                    em.clear();
+                }
+            }
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            trans.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+
+    }
 }
